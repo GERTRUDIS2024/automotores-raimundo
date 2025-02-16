@@ -33,6 +33,44 @@
     <link rel="stylesheet" href="css/custom.css">
     <link rel="stylesheet" href="css/bootstrap.css">
  
+    <style>
+       
+         .contacto-container {
+            width: 100%; /* Hace que el contenedor se ajuste al tamaño de la ventana */
+          /*  display: flex; /* Si usas un layout de flexbox */
+            justify-content: center; /* Centra las imágenes */
+        }
+         
+        .address-item{
+	float: left;
+	margin: 0 5px;
+	padding: 0px 15px; 
+	width: 23%;
+        background-color: #aaaaaa;
+        box-shadow: 0 5px 14px rgba(0, 0, 0, 2); 
+     
+        }
+
+       .address-icon{
+	 padding: 15px 0px;
+        }
+        
+        .address-icon i{
+	  font-size: 38px;
+	  color: #ff0000;
+        }
+
+        .address-item h3{
+        	font-size: 28px;
+        	font-weight: 600;
+	       color: #ff0000;
+        }
+
+       .dmtop.show {
+           bottom: 20px;
+        }
+    </style>
+    
     <script>
        function Blink()  {
            var ElemsBlink = document.getElementsByTagName('blink');
@@ -197,41 +235,53 @@
     <!-- Comienzo de contacto  -->
 
     <div id="contacto" class="section wb">
-        <div class="container">
+        <div class="contacto-container">
             <div class="section-title text-center">
                 <h3>Contactanos !!
                 <br>Estrena el auto que tú y tu familia necesitan.<br>¡Comienza tu camino hoy mismo!</h3>
 			<div class="row">
 				<div class="col-md-offset-1 col-sm-10 col-md-10 col-sm-offset-1 pd-add">
 					
-                                      
+                                        
                                         <div class="address-item">
 						<div class="address-icon" >
                    			           <a target="_blank" href="https://maps.app.goo.gl/EZ9p2oE5xQH1rAKk8" ><i class="icon icon-location2" ></i> </a>
  						</div>
-						<h3>Ubicacion</h3>
-                                                <p style="color:black; font-style: italic;"><blink>Click al PIN de Google Maps</blink>
-                                                    <br>Para ver Ubicacion en Mapa </p>
+						<p><font color="#ff0000" size="4"><B>UBICACION</B></font>
+                                                    <br></p>
+                                                <p><font color="black" font-style="italic" size="2"  ><blink>Click al PIN de Google Maps</blink>
+                                                <br>Para ver Ubicacion en Mapa </font></p>
 					</div>
                                         
 					<div class="address-item">
 						<div class="address-icon">
 							<i class="fa fa-envelope" aria-hidden="true"></i>
 						</div>
-						<h3>Nuestro Correo</h3>
-                                                
-						<p style="color:black; font-style: italic">Consultanos en : <br>automotoresraimundo@gmail.com
-							</p>
+                                            <p><font color="#ff0000" size="4"><B>Nuestro Correo</B></font></p>
+				     
+                                            <p><font color="black" size="2">Consultanos en : <br>automotoresraimundo@gmail.com
+                                                </font></p>
 					</div>
 					<div class="address-item">
 						<div class="address-icon">
 							<i class="fa fa-whatsapp"></i>
 						</div>
-                                            <h3>Llamanos</h3>
-						<p style="color:black; font-style: italic">336 4325076 Damian
-							<br>336 4324851 Rene</p>
+                                            <p><font color="#ff0000" size="4"><B>Llamanos</B></font></p>
+                                                <p><font color="black" size="2" >336 4325076 Damian
+							<br>336 4324851 Rene</font></p>
 					</div>
                                    
+                                       <div class="address-item">
+						<div class="address-icon">
+							<i class="fa fa-instagram" aria-hidden="true"></i>
+						</div>
+						 <p><font color="black" size="2" >@automotores_raimundo</font></p>
+                                                <div class="address-icon">
+							<i class="fa fa-facebook-official" aria-hidden="true"></i>
+						</div>
+                                   	
+                                       </div>
+                                      
 				</div>
 			</div><!-- end row -->
 			
