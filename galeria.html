@@ -237,9 +237,20 @@
             background-color:red;
         }
 
+       #noResultsMessage {
+              color: red;
+              font-size: 34px; /* Aquí aumentamos el tamaño de la fuente */
+              margin-top: 15px;
+              text-align: right;
+              display: block; /* Asegura que se muestre */
+              font-weight: bold; /* Opcional, para hacerlo más destacado */
+              white-space: nowrap;
+}
     </style>
 
     <script>
+        
+        
         function filterGallery() {
             
             // Borra el campo de búsqueda manual
@@ -247,17 +258,42 @@
             
             const selectedBrandKm = document.getElementById('brandSelectKm').value.toLowerCase();
             const items = document.querySelectorAll('.gallery-item');
-
+            let found = false; // Aseguramos que esta variable esté definida dentro de la función
+            
             items.forEach(item => {
                 const keywords = item.getAttribute('data-keywords').toLowerCase();
                 if (keywords.includes(selectedBrandKm)) {
                     item.classList.add('visible');
+                    found = true;  // Si encontramos un elemento, asignamos true a 'found'
                 } else {
                     item.classList.remove('visible');
                 }
             });
-
+            
+    
+            // Verificamos si no hay elementos visibles después del filtro
+            const noResultsMessage = document.getElementById('noResultsMessage');
+            if (!found) {
+               // Si no existe el mensaje de "No resultados", lo creamos
+                if (!noResultsMessage) {
+                   const message = document.createElement('p');
+                   message.id = 'noResultsMessage';
+                   message.innerHTML =  'No hay vehículos 0 Km disponibles en este momento.<BR>Pero observa la amplia gama de Usados en IMPECABLE ESTADO !!!';
+                   message.style.color = 'red';
+                   message.style.textAlign = 'right'  ;
+                   message.style.marginTop = '10px';
+           
+                   document.querySelector('.gallery-container').appendChild(message);
         }
+    } else {
+        // Si se encontraron resultados, eliminamos el mensaje de "No resultados"
+        if (noResultsMessage) {
+            noResultsMessage.remove(); // Elimina el mensaje si hay resultados
+        }
+    }
+            
+
+    }
 
         function filterGalleryByBrand() {
             
@@ -275,7 +311,7 @@
                     item.classList.remove('visible');
                 }
             });
-
+            
 
         }
 
@@ -289,6 +325,7 @@
             // Muestra todas las imágenes
             const items = document.querySelectorAll('.gallery-item');
             items.forEach(item => item.classList.add('visible'));
+          
 
         }
 
@@ -296,6 +333,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             const items = document.querySelectorAll('.gallery-item');
             items.forEach(item => item.classList.add('visible'));
+            
         });
  
  
@@ -448,14 +486,14 @@ function closeLightbox() {
             <option value="Renault">Renault</option>
             <option value="Citroen">Citroen</option>
         </select>
-        
+    
     </div>
     <!-- Aqui terminaria la parte de encabezamiento conjuntamente con los Select para los filtros -->
     <!-- Aqui comienza la Galeria de imagenes -->
    
     <p><font color="#ffffff" size="5">Click a la Imagen para mostrarte mas Detalles !!</font></p>
     <div class="gallery-container" >
-         
+      
         <a href= "javascript:void(0)" class="gallery-item" data-keywords="ChevroletUsado" onclick="showSubGallery('subgaleria1', 'IMAGEN01_1')">
             <img src="galeria/Usado_Chevrolet_01.jpg" alt="SPIN BLANCA" >
         </a>
