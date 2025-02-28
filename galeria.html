@@ -269,30 +269,37 @@
                     item.classList.remove('visible');
                 }
             });
-            
+      /*      
+      // Verificamos si no hay elementos visibles después del filtro
+    const noResultsMessage = document.getElementById('noResultsMessage');
     
-            // Verificamos si no hay elementos visibles después del filtro
-            const noResultsMessage = document.getElementById('noResultsMessage');
-            if (!found) {
-               // Si no existe el mensaje de "No resultados", lo creamos
-                if (!noResultsMessage) {
-                   const message = document.createElement('p');
-                   message.id = 'noResultsMessage';
-                   message.innerHTML =  'No hay vehículos 0 Km disponibles en este momento.<BR>Pero observa la amplia gama de Usados en<BR>IMPECABLE ESTADO !!!.-';
-                   message.style.color = 'red';
-                   message.style.textAlign = 'right'  ;
-                   message.style.marginTop = '10px';
-           
-                   document.querySelector('.gallery-container').appendChild(message);
+    if (selectedBrandKm === '0km') {
+        // Solo mostramos el mensaje cuando el filtro es '0km' y no se encontraron resultados
+        if (!found) {
+            if (!noResultsMessage) {
+                const message = document.createElement('p');
+                message.id = 'noResultsMessage';
+                message.innerHTML = 'No hay vehículos 0 Km disponibles en este momento.<BR>Pero observa la amplia gama de Usados en<BR>IMPECABLE ESTADO !!!.-';
+                message.style.color = 'red';
+                message.style.textAlign = 'right';
+                message.style.marginTop = '10px';
+                
+                document.querySelector('.gallery-container').appendChild(message);
+            }
+        } else {
+            // Si se encuentran resultados para '0km', eliminamos el mensaje de "No resultados"
+            if (noResultsMessage) {
+                noResultsMessage.remove();
+            }
         }
     } else {
-        // Si se encontraron resultados, eliminamos el mensaje de "No resultados"
+        // Si no es '0km', eliminamos el mensaje de "No resultados"
         if (noResultsMessage) {
-            noResultsMessage.remove(); // Elimina el mensaje si hay resultados
+            noResultsMessage.remove();
         }
     }
-            
-
+      
+    */
     }
 
         function filterGalleryByBrand() {
