@@ -258,6 +258,7 @@
             
             const selectedBrandKm = document.getElementById('brandSelectKm').value.toLowerCase();
             const items = document.querySelectorAll('.gallery-item');
+            
             let found = false; // Aseguramos que esta variable esté definida dentro de la función
             
             items.forEach(item => {
@@ -269,11 +270,12 @@
                     item.classList.remove('visible');
                 }
             });
-      /*      
+          
       // Verificamos si no hay elementos visibles después del filtro
     const noResultsMessage = document.getElementById('noResultsMessage');
     
     if (selectedBrandKm === '0km') {
+        
         // Solo mostramos el mensaje cuando el filtro es '0km' y no se encontraron resultados
         if (!found) {
             if (!noResultsMessage) {
@@ -293,20 +295,22 @@
             }
         }
     } else {
+        
         // Si no es '0km', eliminamos el mensaje de "No resultados"
         if (noResultsMessage) {
             noResultsMessage.remove();
         }
     }
       
-    */
-    }
+   
+   
+    } // Aqui se cierra la funcion 
 
         function filterGalleryByBrand() {
             
             // Borra el campo de búsqueda manual
             document.getElementById('brandSelectKm').value = "";
-            
+            let found = false; // Aseguramos que esta variable esté definida dentro de la función
             const selectedBrand = document.getElementById('brandSelect').value.toLowerCase();
             const items = document.querySelectorAll('.gallery-item');
 
@@ -314,26 +318,51 @@
                 const keywords = item.getAttribute('data-keywords').toLowerCase();
                 if (keywords.includes(selectedBrand)) {
                     item.classList.add('visible');
+                    found = true;
                 } else {
                     item.classList.remove('visible');
                 }
             });
-            
-
+        
+          // Si no encontramos elementos, eliminamos el mensaje de "No resultados"
+    const noResultsMessage = document.getElementById('noResultsMessage');
+    if (!found) {
+        if (!noResultsMessage) {
+            const message = document.createElement('p');
+            message.id = 'noResultsMessage';
+            message.innerHTML = 'No hay vehículos de esta marca disponibles en este momento.';
+            message.style.color = 'red';
+            message.style.textAlign = 'right';
+            message.style.marginTop = '10px';
+            document.querySelector('.gallery-container').appendChild(message);
+        }
+    } else {
+        // Si encontramos resultados, eliminamos el mensaje de "No resultados"
+        if (noResultsMessage) {
+            noResultsMessage.remove();
+        }
+    }
+        
+        
         }
 
         function limpia() {
-
+           
             // Borra el campo de búsqueda manual
             document.getElementById('brandSelect').value = "";
             // Borra el campo de búsqueda manual
             document.getElementById('brandSelectKm').value = "";
-
+           
             // Muestra todas las imágenes
             const items = document.querySelectorAll('.gallery-item');
             items.forEach(item => item.classList.add('visible'));
-          
-
+            
+            // Eliminar el mensaje de "No resultados" si existe
+            const noResultsMessage = document.getElementById('noResultsMessage');
+            if (noResultsMessage) {
+               noResultsMessage.remove();
+            }
+         
         }
 
         // Inicialmente muestra todas las imágenes
