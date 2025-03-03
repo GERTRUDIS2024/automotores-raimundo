@@ -237,7 +237,7 @@
             background-color:red;
         }
 
-       #noResultsMessage {
+        #noResultsMessage {
               color: red;
               font-size: 34px; /* Aquí aumentamos el tamaño de la fuente */
               margin-top: 15px;
@@ -245,7 +245,16 @@
               display: block; /* Asegura que se muestre */
               font-weight: bold; /* Opcional, para hacerlo más destacado */
               white-space: nowrap;
-}
+        }
+        #noResultsMessageBrand {
+              color: red;
+              font-size: 34px; /* Aquí aumentamos el tamaño de la fuente */
+              margin-top: 15px;
+              text-align: right;
+              display: block; /* Asegura que se muestre */
+              font-weight: bold; /* Opcional, para hacerlo más destacado */
+              white-space: nowrap;
+        }
     </style>
 
     <script>
@@ -261,6 +270,12 @@
             
             let found = false; // Aseguramos que esta variable esté definida dentro de la función
             
+            // Eliminar el mensaje anterior de "No hay resultados por marca"
+            const noResultsMessageBrand = document.getElementById('noResultsMessageBrand');
+            if (noResultsMessageBrand) {
+                noResultsMessageBrand.remove();
+            }
+
             items.forEach(item => {
                 const keywords = item.getAttribute('data-keywords').toLowerCase();
                 if (keywords.includes(selectedBrandKm)) {
@@ -271,8 +286,8 @@
                 }
             });
           
-      // Verificamos si no hay elementos visibles después del filtro
-    const noResultsMessage = document.getElementById('noResultsMessage');
+         // Verificamos si no hay elementos visibles después del filtro
+         const noResultsMessage = document.getElementById('noResultsMessage');
     
     if (selectedBrandKm === '0km') {
         
@@ -314,6 +329,12 @@
             const selectedBrand = document.getElementById('brandSelect').value.toLowerCase();
             const items = document.querySelectorAll('.gallery-item');
 
+            // Eliminar el mensaje anterior de "No hay resultados por 0Km"
+            const noResultsMessage = document.getElementById('noResultsMessage');
+            if (noResultsMessage) {
+               noResultsMessage.remove();
+            }
+            
             items.forEach(item => {
                 const keywords = item.getAttribute('data-keywords').toLowerCase();
                 if (keywords.includes(selectedBrand)) {
@@ -325,11 +346,11 @@
             });
         
           // Si no encontramos elementos, eliminamos el mensaje de "No resultados"
-    const noResultsMessage = document.getElementById('noResultsMessage');
+    const noResultsMessageBrand = document.getElementById('noResultsMessageBrand');
     if (!found) {
-        if (!noResultsMessage) {
+        if (!noResultsMessageBrand) {
             const message = document.createElement('p');
-            message.id = 'noResultsMessage';
+            message.id = 'noResultsMessageBrand';
             message.innerHTML = 'No hay vehículos de esta marca disponibles en este momento.';
             message.style.color = 'red';
             message.style.textAlign = 'right';
@@ -338,8 +359,8 @@
         }
     } else {
         // Si encontramos resultados, eliminamos el mensaje de "No resultados"
-        if (noResultsMessage) {
-            noResultsMessage.remove();
+        if (noResultsMessageBrand) {
+            noResultsMessageBrand.remove();
         }
     }
         
@@ -362,7 +383,11 @@
             if (noResultsMessage) {
                noResultsMessage.remove();
             }
-         
+            // Eliminar el mensaje de "No resultados" si existe
+            const noResultsMessageBrand = document.getElementById('noResultsMessageBrand');
+            if (noResultsMessageBrand) {
+               noResultsMessageBrand.remove();
+            }
         }
 
         // Inicialmente muestra todas las imágenes
@@ -521,6 +546,7 @@ function closeLightbox() {
             <option value="VW">Volkswagen</option>
             <option value="Renault">Renault</option>
             <option value="Citroen">Citroen</option>
+            <option value="Mercedes">Mercedes Benz</option>
         </select>
     
     </div>
