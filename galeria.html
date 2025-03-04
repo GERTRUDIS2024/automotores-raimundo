@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="css/prettyPhoto.css">
     <link rel="stylesheet" href="css/custom.css">
     <link rel="stylesheet" href="css/bootstrap.css">
-
+ 
     <!-- Modernizer for Portfolio -->
     <script src="js/modernizer.js"></script>
 
@@ -68,9 +68,11 @@
             background-color: #ff0;
         }
 
-        h1 {
+        h4 {
             text-align: center;
-            color: #000000;
+            color: blue; /* Cambiar a azul */
+            font-size: 3em; /* Aumentar el tamaño del texto */
+            border: none; /* Asegurar que no haya borde */
         }
         
          .search-container {
@@ -93,16 +95,20 @@
         .gallery-container {
             display: grid;
             grid-template-columns: repeat(4, minmax(300px, 1fr));
-           /* grid-template-columns: repeat(3, minmax(200px,1fr));
+            /* grid-template-columns: repeat(3, minmax(200px,1fr));
             grid-template-rows: repeat(3, minmax(200px,1fr));*/
-           gap: 5px;
-           padding: 20px;
-           max-width: 100%; /* Permite que el contenedor use el ancho completo disponible */
-           margin: auto;
-           flex-wrap: wrap;
-           justify-content: space-between;
-             
+            gap: 5px;
+            padding: 20px;
+            max-width: 100%; /* Permite que el contenedor use el ancho completo disponible */
+            margin: auto;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            background-image: url('images/background_foot.jpg'); /* Agrega la ruta de la imagen aquí */
+            background-size: cover; /* Para que la imagen cubra todo el fondo */
+            background-position: center; /* Centra la imagen de fondo */
+            background-repeat: repeat; /* Evita que la imagen se repita */  
         }
+        
         .gallery-item {
             overflow: hidden;
             border-radius: 10px;
@@ -255,6 +261,22 @@
               font-weight: bold; /* Opcional, para hacerlo más destacado */
               white-space: nowrap;
         }
+        
+        .button {
+           display: flex;
+           justify-content: center;  /* Centra horizontalmente */
+           align-items: center;      /* Centra verticalmente */
+           text-align: center;       /* Asegura que el texto esté centrado */
+           padding: 10px 20px;       /* Ajusta el tamaño del botón si es necesario */
+        }
+
+#scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    
+    z-index: 999;
+}
     </style>
 
     <script>
@@ -526,7 +548,10 @@ function closeLightbox() {
     </header>
 
     <div class="search-container">
-        <h1>Galería de Imágenes</h1>
+        <h4 class="col-md-4">
+            Galeria de Imagenes
+        </h4>
+       
         <button onclick="limpia()" class="button">Todas</button> 
 
         <select id="brandSelectKm" onchange="filterGallery()">
@@ -554,7 +579,7 @@ function closeLightbox() {
     <!-- Aqui comienza la Galeria de imagenes -->
    
     <p><font color="#ffffff" size="5">Click a la Imagen para mostrarte mas Detalles !!</font></p>
-    <div class="gallery-container" >
+    <div class="gallery-container">
       
         <a href= "javascript:void(0)" class="gallery-item" data-keywords="ChevroletUsado" onclick="showSubGallery('subgaleria1', 'IMAGEN01_1')">
             <img src="galeria/Usado_Chevrolet_01.jpg" alt="SPIN BLANCA" >
@@ -2267,14 +2292,61 @@ function closeLightbox() {
         </div>
    </div>
 
-<a href="#" id="scroll-to-top" class="dmtop global-radius"><i class="fa fa-angle-up"></i></a>
+  <!-- Contact Start -->
+  
+    <div class="container-fluid py-5">
+        <p><font color="#ffffff" size="5"><B>Consultanos por esta via si deseas,</B></font><font color="#ffffff" size="2"><br>aunque te esperamos nos visites para brindarte todos los detalles !!</font></p>
+        <div class="container" style="max-width: 900px;">
+            <div class="row">
+                <div class="col-12">
+                    <div class="contact-form">
+                        <div id="success"></div>
+                        <form name="sentMessage" id="contactForm" novalidate="novalidate">
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <div class="control-group">
+                                        <input type="text" class="form-control" id="name" placeholder="Su Nombre" required="required" data-validation-required-message="Ingrese aqui su Nombre" />
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="control-group">
+                                        <input type="email" class="form-control" id="email" placeholder="Su Email" required="required" data-validation-required-message="Ingrese su correo electronico" />
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <input type="text" class="form-control" id="subject" placeholder="Subject" required="required" data-validation-required-message="Escriba aqui el motivo" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="control-group">
+                                <textarea class="form-control" rows="6" id="message" placeholder="Message" required="required" data-validation-required-message="Escriba aqui su mensaje"></textarea>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div>
+                                <button class="button btn-light btn-brd"  type="submit" id="sendMessageButton">ENVIAR</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+     <a href="#" id="scroll-to-top" class="dmtop global-radius"><i class="fa fa-angle-up"></i></a>     
+    </div>    
+    <!-- Contact End -->
 
+ 
+   
     <!-- ALL JS FILES -->
     <script src="js/all.js"></script>
     <!-- ALL PLUGINS -->
     <script src="js/custom.js"></script>
     <script src="js/portfolio.js"></script>
     <script src="js/hoverdir.js"></script>  
-
+    <!-- Contact Javascript File -->
+    <script src="mail/jqBootstrapValidation.min.js"></script>
+    <script src="mail/contact.js"></script>
+ 
 </body>
 </html>
