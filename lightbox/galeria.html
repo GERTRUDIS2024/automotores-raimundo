@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="css/prettyPhoto.css">
     <link rel="stylesheet" href="css/custom.css">
     <link rel="stylesheet" href="css/bootstrap.css">
-
+ 
     <!-- Modernizer for Portfolio -->
     <script src="js/modernizer.js"></script>
 
@@ -68,9 +68,11 @@
             background-color: #ff0;
         }
 
-        h1 {
+        h4 {
             text-align: center;
-            color: #000000;
+            color: blue; /* Cambiar a azul */
+            font-size: 3em; /* Aumentar el tamaño del texto */
+            border: none; /* Asegurar que no haya borde */
         }
         
          .search-container {
@@ -93,16 +95,20 @@
         .gallery-container {
             display: grid;
             grid-template-columns: repeat(4, minmax(300px, 1fr));
-           /* grid-template-columns: repeat(3, minmax(200px,1fr));
+            /* grid-template-columns: repeat(3, minmax(200px,1fr));
             grid-template-rows: repeat(3, minmax(200px,1fr));*/
-           gap: 5px;
-           padding: 20px;
-           max-width: 100%; /* Permite que el contenedor use el ancho completo disponible */
-           margin: auto;
-           flex-wrap: wrap;
-           justify-content: space-between;
-             
+            gap: 5px;
+            padding: 20px;
+            max-width: 100%; /* Permite que el contenedor use el ancho completo disponible */
+            margin: auto;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            background-image: url('images/background_foot.jpg'); /* Agrega la ruta de la imagen aquí */
+            background-size: cover; /* Para que la imagen cubra todo el fondo */
+            background-position: center; /* Centra la imagen de fondo */
+            background-repeat: repeat; /* Evita que la imagen se repita */  
         }
+        
         .gallery-item {
             overflow: hidden;
             border-radius: 10px;
@@ -237,9 +243,45 @@
             background-color:red;
         }
 
+        #noResultsMessage {
+              color: red;
+              font-size: 34px; /* Aquí aumentamos el tamaño de la fuente */
+              margin-top: 15px;
+              text-align: right;
+              display: block; /* Asegura que se muestre */
+              font-weight: bold; /* Opcional, para hacerlo más destacado */
+              white-space: nowrap;
+        }
+        #noResultsMessageBrand {
+              color: red;
+              font-size: 34px; /* Aquí aumentamos el tamaño de la fuente */
+              margin-top: 15px;
+              text-align: right;
+              display: block; /* Asegura que se muestre */
+              font-weight: bold; /* Opcional, para hacerlo más destacado */
+              white-space: nowrap;
+        }
+        
+        .button {
+           display: flex;
+           justify-content: center;  /* Centra horizontalmente */
+           align-items: center;      /* Centra verticalmente */
+           text-align: center;       /* Asegura que el texto esté centrado */
+           padding: 10px 20px;       /* Ajusta el tamaño del botón si es necesario */
+        }
+
+#scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    
+    z-index: 999;
+}
     </style>
 
     <script>
+        
+        
         function filterGallery() {
             
             // Borra el campo de búsqueda manual
@@ -247,55 +289,134 @@
             
             const selectedBrandKm = document.getElementById('brandSelectKm').value.toLowerCase();
             const items = document.querySelectorAll('.gallery-item');
+            
+            let found = false; // Aseguramos que esta variable esté definida dentro de la función
+            
+            // Eliminar el mensaje anterior de "No hay resultados por marca"
+            const noResultsMessageBrand = document.getElementById('noResultsMessageBrand');
+            if (noResultsMessageBrand) {
+                noResultsMessageBrand.remove();
+            }
 
             items.forEach(item => {
                 const keywords = item.getAttribute('data-keywords').toLowerCase();
                 if (keywords.includes(selectedBrandKm)) {
                     item.classList.add('visible');
+                    found = true;  // Si encontramos un elemento, asignamos true a 'found'
                 } else {
                     item.classList.remove('visible');
                 }
             });
-
+          
+         // Verificamos si no hay elementos visibles después del filtro
+         const noResultsMessage = document.getElementById('noResultsMessage');
+    
+    if (selectedBrandKm === '0km') {
+        
+        // Solo mostramos el mensaje cuando el filtro es '0km' y no se encontraron resultados
+        if (!found) {
+            if (!noResultsMessage) {
+                const message = document.createElement('p');
+                message.id = 'noResultsMessage';
+                message.innerHTML = 'En 0 Km trabajamos todas las marcas !!.<BR>CONSULTANOS por precios y planes de financiacion !!.<BR>TE ESPERAMOS !!!.';
+                message.style.color = 'red';
+                message.style.textAlign = 'right';
+                message.style.marginTop = '10px';
+                
+                document.querySelector('.gallery-container').appendChild(message);
+            }
+        } else {
+            // Si se encuentran resultados para '0km', eliminamos el mensaje de "No resultados"
+            if (noResultsMessage) {
+                noResultsMessage.remove();
+            }
         }
+    } else {
+        
+        // Si no es '0km', eliminamos el mensaje de "No resultados"
+        if (noResultsMessage) {
+            noResultsMessage.remove();
+        }
+    }
+      
+   
+   
+    } // Aqui se cierra la funcion 
 
         function filterGalleryByBrand() {
             
             // Borra el campo de búsqueda manual
             document.getElementById('brandSelectKm').value = "";
-            
+            let found = false; // Aseguramos que esta variable esté definida dentro de la función
             const selectedBrand = document.getElementById('brandSelect').value.toLowerCase();
             const items = document.querySelectorAll('.gallery-item');
 
+            // Eliminar el mensaje anterior de "No hay resultados por 0Km"
+            const noResultsMessage = document.getElementById('noResultsMessage');
+            if (noResultsMessage) {
+               noResultsMessage.remove();
+            }
+            
             items.forEach(item => {
                 const keywords = item.getAttribute('data-keywords').toLowerCase();
                 if (keywords.includes(selectedBrand)) {
                     item.classList.add('visible');
+                    found = true;
                 } else {
                     item.classList.remove('visible');
                 }
             });
-
-
+        
+          // Si no encontramos elementos, eliminamos el mensaje de "No resultados"
+    const noResultsMessageBrand = document.getElementById('noResultsMessageBrand');
+    if (!found) {
+        if (!noResultsMessageBrand) {
+            const message = document.createElement('p');
+            message.id = 'noResultsMessageBrand';
+            message.innerHTML = 'No hay vehículos de esta marca disponibles en este momento.';
+            message.style.color = 'red';
+            message.style.textAlign = 'right';
+            message.style.marginTop = '10px';
+            document.querySelector('.gallery-container').appendChild(message);
+        }
+    } else {
+        // Si encontramos resultados, eliminamos el mensaje de "No resultados"
+        if (noResultsMessageBrand) {
+            noResultsMessageBrand.remove();
+        }
+    }
+        
+        
         }
 
         function limpia() {
-
+           
             // Borra el campo de búsqueda manual
             document.getElementById('brandSelect').value = "";
             // Borra el campo de búsqueda manual
             document.getElementById('brandSelectKm').value = "";
-
+           
             // Muestra todas las imágenes
             const items = document.querySelectorAll('.gallery-item');
             items.forEach(item => item.classList.add('visible'));
-
+            
+            // Eliminar el mensaje de "No resultados" si existe
+            const noResultsMessage = document.getElementById('noResultsMessage');
+            if (noResultsMessage) {
+               noResultsMessage.remove();
+            }
+            // Eliminar el mensaje de "No resultados" si existe
+            const noResultsMessageBrand = document.getElementById('noResultsMessageBrand');
+            if (noResultsMessageBrand) {
+               noResultsMessageBrand.remove();
+            }
         }
 
         // Inicialmente muestra todas las imágenes
         document.addEventListener('DOMContentLoaded', () => {
             const items = document.querySelectorAll('.gallery-item');
             items.forEach(item => item.classList.add('visible'));
+            
         });
  
  
@@ -427,7 +548,10 @@ function closeLightbox() {
     </header>
 
     <div class="search-container">
-        <h1>Galería de Imágenes</h1>
+        <h4 class="col-md-4">
+            Galeria de Imagenes
+        </h4>
+       
         <button onclick="limpia()" class="button">Todas</button> 
 
         <select id="brandSelectKm" onchange="filterGallery()">
@@ -447,97 +571,108 @@ function closeLightbox() {
             <option value="VW">Volkswagen</option>
             <option value="Renault">Renault</option>
             <option value="Citroen">Citroen</option>
+            <option value="Mercedes">Mercedes Benz</option>
         </select>
-        
+    
     </div>
     <!-- Aqui terminaria la parte de encabezamiento conjuntamente con los Select para los filtros -->
     <!-- Aqui comienza la Galeria de imagenes -->
    
     <p><font color="#ffffff" size="5">Click a la Imagen para mostrarte mas Detalles !!</font></p>
-    <div class="gallery-container" >
-         
+    <div class="gallery-container">
+      
         <a href= "javascript:void(0)" class="gallery-item" data-keywords="ChevroletUsado" onclick="showSubGallery('subgaleria1', 'IMAGEN01_1')">
-            <img src="galeria/Usado_Chevrolet_01.jpg" alt="" >
+            <img src="galeria/Usado_Chevrolet_01.jpg" alt="SPIN BLANCA" >
         </a>
         <a href="javascript:void(0)" class="gallery-item" data-keywords="FordUsado" onclick="showSubGallery('subgaleria3', 'IMAGEN03_1')">
-            <img src="galeria/Ford_Usado_01.png" alt="">
+            <img src="galeria/Ford_Usado_01.png" alt="FIESTA ROJOMETALICO">
         </a>
         <a href= "javascript:void(0)"  class="gallery-item" data-keywords="RenaultUsado" onclick="showSubGallery('subgaleria4', 'IMAGEN04_1')">
-            <img src="galeria/Usado_Renault_01.png" alt="">
+            <img src="galeria/Usado_Renault_01.png" alt="KANGOO">
         </a> 
         <a href= "javascript:void(0)"  class="gallery-item" data-keywords="VWUsado" onclick="showSubGallery('subgaleria2', 'IMAGEN02_1')">
-            <img src="galeria/VolksWagen_Usado_02.png" alt="">
+            <img src="galeria/VolksWagen_Usado_02.png" alt="VOYAGE">
         </a> 
         <a href= "javascript:void(0)"  class="gallery-item" data-keywords="ChevroletUsado" onclick="showSubGallery('subgaleria5', 'IMAGEN05_1')">
-            <img src="galeria/Usado_Chevrolet_02.png" alt="">
+            <img src="galeria/Usado_Chevrolet_02.png" alt="CRUZE">
         </a> 
-        <a href= "javascript:void(0)"  class="gallery-item" data-keywords="ChevroletUsado" onclick="showSubGallery('subgaleria6', 'IMAGEN06_1')">
-            <img src="galeria/Usado_Chevrolet_03.png" alt="">
+        <a href= "javascript:void(0)"  class="gallery-item" data-keywords="RenaultUsado" onclick="showSubGallery('subgaleria6', 'IMAGEN06_1')">
+            <img src="galeria/Usado_Renault_02.png" alt="CLIO_GNC">
         </a> 
         <a href= "javascript:void(0)"  class="gallery-item" data-keywords="CitroenUsado" onclick="showSubGallery('subgaleria7', 'IMAGEN07_1')">
-            <img src="galeria/Usado_Citroen_01.png" alt="">
+            <img src="galeria/Usado_Citroen_01.png" alt="C3 GRIS">
         </a> 
-        <a href= "javascript:void(0)"  class="gallery-item" data-keywords="FiatUsado" onclick="showSubGallery('subgaleria8', 'IMAGEN08_1')">
-            <img src="galeria/Usado_Fiat_01.png" alt="">
+        <a href= "javascript:void(0)"  class="gallery-item" data-keywords="ChevroletUsado" onclick="showSubGallery('subgaleria8', 'IMAGEN08_1')">
+            <img src="galeria/Usado_Chevrolet_03.png" alt="CRUZE ROJO">
         </a> 
         <a href= "javascript:void(0)"  class="gallery-item" data-keywords="FiatUsado" onclick="showSubGallery('subgaleria9', 'IMAGEN09_1')">
-            <img src="galeria/Usado_Fiat_02.png" alt="">
+            <img src="galeria/Usado_Fiat_02.png" alt="PUNTO">
         </a> 
-        <a href= "javascript:void(0)"  class="gallery-item" data-keywords="FordUsado" onclick="showSubGallery('subgaleria10', 'IMAGEN10_1')">
-            <img src="galeria/Usado_Ford_02.png" alt="">
+        <a href= "javascript:void(0)"  class="gallery-item" data-keywords="FiatUsado" onclick="showSubGallery('subgaleria10', 'IMAGEN10_1')">
+            <img src="galeria/Usado_Fiat_01.png" alt="FIAT CRONOS">
         </a> 
         <a href= "javascript:void(0)"  class="gallery-item" data-keywords="FordUsado" onclick="showSubGallery('subgaleria11', 'IMAGEN11_1')">
-            <img src="galeria/Usado_Ford_03.png" alt="">
+            <img src="galeria/Usado_Ford_03.png" alt="ECOSPORT NEGRA">
         </a> 
-         <a href= "javascript:void(0)"  class="gallery-item" data-keywords="FordUsado" onclick="showSubGallery('subgaleria12', 'IMAGEN12_1')">
-            <img src="galeria/Usado_Ford_04.png" alt="">
+        <!-- LIBRE GALERIA 12 !!!!!!!>
+        <a href= "javascript:void(0)"  class="gallery-item" data-keywords="FordUsado" onclick="showSubGallery('subgaleria12', 'IMAGEN12_1')">
+            <img src="galeria/Usado_Ford_01.png" alt="FOCUS EXE">
         </a> 
-         <a href= "javascript:void(0)"  class="gallery-item" data-keywords="PeugeotUsado" onclick="showSubGallery('subgaleria13', 'IMAGEN13_1')">
-            <img src="galeria/Usado_Peugeot_01.png" alt="">
+        <-->
+        <a href= "javascript:void(0)"  class="gallery-item" data-keywords="PeugeotUsado" onclick="showSubGallery('subgaleria13', 'IMAGEN13_1')">
+            <img src="galeria/Usado_Peugeot_01.png" alt="208 GRIS">
         </a> 
         <a href= "javascript:void(0)"  class="gallery-item" data-keywords="PeugeotUsado" onclick="showSubGallery('subgaleria14', 'IMAGEN14_1')">
-            <img src="galeria/Usado_Peugeot_02.png" alt="">
+            <img src="galeria/Usado_Peugeot_02.png" alt="207 BLANCO">
         </a>
         <a href= "javascript:void(0)"  class="gallery-item" data-keywords="PeugeotUsado" onclick="showSubGallery('subgaleria15', 'IMAGEN15_1')">
-            <img src="galeria/Usado_Peugeot_03.png" alt="">
+            <img src="galeria/Usado_Peugeot_03.png" alt="308 GRIS">
         </a>
         <a href= "javascript:void(0)"  class="gallery-item" data-keywords="PeugeotUsado" onclick="showSubGallery('subgaleria16', 'IMAGEN16_1')">
-            <img src="galeria/Usado_Peugeot_04.png" alt="">
+            <img src="galeria/Usado_Peugeot_04.png" alt="208 NEGRO">
         </a>
         <a href= "javascript:void(0)"  class="gallery-item" data-keywords="ToyotaUsado" onclick="showSubGallery('subgaleria17', 'IMAGEN17_1')">
-            <img src="galeria/Usado_Toyota_01.png" alt="">
+            <img src="galeria/Usado_Toyota_01.png" alt="COROLLA">
         </a>
         <a href= "javascript:void(0)"  class="gallery-item" data-keywords="VWUsado" onclick="showSubGallery('subgaleria18', 'IMAGEN18_1')">
-            <img src="galeria/Usado_VolksWagen_01.png" alt="">
+            <img src="galeria/Usado_VolksWagen_01.png" alt="SURAN">
         </a>
         <a href= "javascript:void(0)"  class="gallery-item" data-keywords="VWUsado" onclick="showSubGallery('subgaleria19', 'IMAGEN19_1')">
-            <img src="galeria/Usado_VolksWagen_03.png" alt="">
+            <img src="galeria/Usado_VolksWagen_03.png" alt="VENTO">
         </a>
+        <!--  LIBRE GALERIA 20 PARA OTRO AUTO !!!!!!!!!!!!!!!!!!!!!>
          <a href= "javascript:void(0)"  class="gallery-item" data-keywords="VWUsado" onclick="showSubGallery('subgaleria20', 'IMAGEN20_1')">
-            <img src="galeria/Usado_VolksWagen_04.png" alt="">
+            <img src="galeria/Usado_VolksWagen_04.png" alt="AMAROK">
         </a>
+        <-->
         <a href= "javascript:void(0)"  class="gallery-item" data-keywords="CitroenUsado" onclick="showSubGallery('subgaleria21', 'IMAGEN21_1')">
-            <img src="galeria/Usado_Citroen_02.png" alt="">
+            <img src="galeria/Usado_Citroen_02.png" alt="C4 BLANCO">
         </a> 
          <a href= "javascript:void(0)"  class="gallery-item" data-keywords="FordUsado" onclick="showSubGallery('subgaleria22', 'IMAGEN22_1')">
-            <img src="galeria/Usado_Ford_05.png" alt="">
+            <img src="galeria/Usado_Ford_05.png" alt="KA">
         </a> 
+         <!--  LIBRE GALERIA 23 PARA OTRO AUTO !!!!!!!!!!!!!!!!!!!!!>
          <a href= "javascript:void(0)"  class="gallery-item" data-keywords="CitroenUsado" onclick="showSubGallery('subgaleria23', 'IMAGEN23_1')">
-            <img src="galeria/Usado_Citroen_03.png" alt="">
+            <img src="galeria/Usado_Citroen_03.png" alt="C3 NEGRA">
         </a>
+         <-->
         <a href= "javascript:void(0)"  class="gallery-item" data-keywords="NissanUsado" onclick="showSubGallery('subgaleria24', 'IMAGEN24_1')">
-            <img src="galeria/Usado_Nissan_01.png" alt="">
+            <img src="galeria/Usado_Nissan_01.png" alt="KICKS">
         </a>
         <a href= "javascript:void(0)"  class="gallery-item" data-keywords="PeugeotUsado" onclick="showSubGallery('subgaleria25', 'IMAGEN25_1')">
-            <img src="galeria/Usado_Peugeot_05.png" alt="">
+            <img src="galeria/Usado_Peugeot_05.png" alt="208 BLANCO">
         </a>
-        <a href= "javascript:void(0)"  class="gallery-item" data-keywords="PeugeotUsado" onclick="showSubGallery('subgaleria26', 'IMAGEN26_1')">
-            <img src="galeria/Usado_Peugeot_06.png" alt="">
+        <a href= "javascript:void(0)"  class="gallery-item" data-keywords="FordUsado" onclick="showSubGallery('subgaleria26', 'IMAGEN26_1')">
+            <img src="galeria/Usado_Ford_02.png" alt="FOCUS SEDAN">
         </a>
+         <!--  LIBRE GALERIA 23 PARA OTRO AUTO !!!!!!!!!!!!!!!!!!!!!> 
         <a href= "javascript:void(0)"  class="gallery-item" data-keywords="VWUsado" onclick="showSubGallery('subgaleria27', 'IMAGEN27_1')">
-            <img src="galeria/Usado_Volkswagen_05.png" alt="">
+            <img src="galeria/Usado_Volkswagen_05.png" alt="POLO">
         </a>
+         <-->
     </div>
+    
+     <!-- COMIENZO DE LAS SUBGALERIAS !!!!! -->
      <!-- GALERIA 01 -->
     <div id="subgaleria1" class="lightbox">
     
@@ -887,63 +1022,70 @@ function closeLightbox() {
  <div id="subgaleria6" class="lightbox">
     
         <div id="IMAGEN06_1" class="lightbox-item">
-            <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria6','IMAGEN06_8')"><i class="fa fa-angle-left"></i></a>
-            <p><font color="#ffffff" size="5"><B>CHEVROLET SPIN PREMIER LTZ 1.8</B></font><br><font color="#ffffff" size="2">7 ASIENTOS.AÑO: 2020 - Foto 1</font></p>
+            <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria6','IMAGEN06_9')"><i class="fa fa-angle-left"></i></a>
+            <p><font color="#ffffff" size="5"><B>Renault Clio 1.2 5p confort</B></font><br><font color="#ffffff" size="2">plus G.N.C. AÑO: 2014 - Foto 1</font></p>
             <img src="lightbox/IMAGEN06_1.jpg" alt=""/>
             <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria6','IMAGEN06_2')"><i class="fa fa-angle-right"></i></a>
             <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
         </div>
         <div id="IMAGEN06_2" class="lightbox-item">
             <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria6','IMAGEN06_1')"><i class="fa fa-angle-left"></i></a>
-            <p><font color="#ffffff" size="5"><B>CHEVROLET SPIN PREMIER LTZ 1.8</B></font><br><font color="#ffffff" size="2">7 ASIENTOS.AÑO: 2020 - Foto 2</font></p>
+            <p><font color="#ffffff" size="5"><B>Renault Clio 1.2 5p confort</B></font><br><font color="#ffffff" size="2">plus G.N.C. AÑO: 2014 - Foto 2</font></p>
             <img src="lightbox/IMAGEN06_2.jpg" alt=""/>
             <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria6','IMAGEN06_3')"><i class="fa fa-angle-right"></i></a>
             <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
         </div>
         <div id="IMAGEN06_3" class="lightbox-item">
             <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria6','IMAGEN06_2')"><i class="fa fa-angle-left"></i></a>
-            <p><font color="#ffffff" size="5"><B>CHEVROLET SPIN PREMIER LTZ 1.8</B></font><br><font color="#ffffff" size="2">7 ASIENTOS.AÑO: 2020 - Foto 3</font></p>
-            <img src="lightbox/IMAGEN06_3.jpg" alt=""/>
+            <p><font color="#ffffff" size="5"><B>Renault Clio 1.2 5p confort</B></font><br><font color="#ffffff" size="2">plus G.N.C. AÑO: 2014 - Foto 3</font></p>
+            <img src="lightbox/IMAGEN06_3.png" alt=""/>
             <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria6','IMAGEN06_4')"><i class="fa fa-angle-right"></i></a>
             <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
         </div>
         <div id="IMAGEN06_4" class="lightbox-item">
             <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria6','IMAGEN06_3')"><i class="fa fa-angle-left"></i></a>
-            <p><font color="#ffffff" size="5"><B>CHEVROLET SPIN PREMIER LTZ 1.8</B></font><br><font color="#ffffff" size="2">7 ASIENTOS.AÑO: 2020 - Foto 4</font></p>
+            <p><font color="#ffffff" size="5"><B>Renault Clio 1.2 5p confort</B></font><br><font color="#ffffff" size="2">plus G.N.C. AÑO: 2014 - Foto 4</font></p>
             <img src="lightbox/IMAGEN06_4.jpg" alt=""/>
             <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria6','IMAGEN06_5')"><i class="fa fa-angle-right"></i></a>
             <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
         </div>
         <div id="IMAGEN06_5" class="lightbox-item">
             <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria6','IMAGEN06_4')"><i class="fa fa-angle-left"></i></a>
-            <p><font color="#ffffff" size="5"><B>CHEVROLET SPIN PREMIER LTZ 1.8</B></font><br><font color="#ffffff" size="2">7 ASIENTOS.AÑO: 2020 - Foto 5</font></p>
+            <p><font color="#ffffff" size="5"><B>Renault Clio 1.2 5p confort</B></font><br><font color="#ffffff" size="2">plus G.N.C. AÑO: 2014 - Foto 5</font></p>
             <img src="lightbox/IMAGEN06_5.jpg" alt=""/>
             <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria6','IMAGEN06_6')"><i class="fa fa-angle-right"></i></a>
             <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
         </div>
         <div id="IMAGEN06_6" class="lightbox-item">
             <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria6','IMAGEN06_5')"><i class="fa fa-angle-left"></i></a>
-            <p><font color="#ffffff" size="5"><B>CHEVROLET SPIN PREMIER LTZ 1.8</B></font><br><font color="#ffffff" size="2">7 ASIENTOS.AÑO: 2020 - Foto 6</font></p>
-            <img src="lightbox/IMAGEN06_6.jpg" alt=""/>
+            <p><font color="#ffffff" size="5"><B>Renault Clio 1.2 5p confort</B></font><br><font color="#ffffff" size="2">plus G.N.C. AÑO: 2014 - Foto 6</font></p>
+            <img src="lightbox/IMAGEN06_6.png" alt=""/>
             <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria6','IMAGEN06_7')"><i class="fa fa-angle-right"></i></a>
             <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
         </div>
        <div id="IMAGEN06_7" class="lightbox-item">
             <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria6','IMAGEN06_6')"><i class="fa fa-angle-left"></i></a>
-            <p><font color="#ffffff" size="5"><B>CHEVROLET SPIN PREMIER LTZ 1.8</B></font><br><font color="#ffffff" size="2">7 ASIENTOS.AÑO: 2020 - Foto 7</font></p>
-            <img src="lightbox/IMAGEN06_7.jpg" alt=""/>
+            <p><font color="#ffffff" size="5"><B>Renault Clio 1.2 5p confort</B></font><br><font color="#ffffff" size="2">plus G.N.C. AÑO: 2014 - Foto 7</font></p>
+            <img src="lightbox/IMAGEN06_7.png" alt=""/>
             <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria6','IMAGEN06_8')"><i class="fa fa-angle-right"></i></a>
             <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
         </div>
         <div id="IMAGEN06_8" class="lightbox-item">
             <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria6','IMAGEN06_7')"><i class="fa fa-angle-left"></i></a>
-            <p><font color="#ffffff" size="5"><B>CHEVROLET SPIN PREMIER LTZ 1.8</B></font><br><font color="#ffffff" size="2">7 ASIENTOS.AÑO: 2020 - Foto 8</font></p>
-            <img src="lightbox/IMAGEN06_8.jpg" alt=""/>
+            <p><font color="#ffffff" size="5"><B>Renault Clio 1.2 5p confort</B></font><br><font color="#ffffff" size="2">plus G.N.C. AÑO: 2014 - Foto 8</font></p>
+            <img src="lightbox/IMAGEN06_8.png" alt=""/>
+            <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria6','IMAGEN06_9')"><i class="fa fa-angle-right"></i></a>
+            <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
+        </div>
+        <div id="IMAGEN06_9" class="lightbox-item">
+            <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria6','IMAGEN06_8')"><i class="fa fa-angle-left"></i></a>
+            <p><font color="#ffffff" size="5"><B>Renault Clio 1.2 5p confort</B></font><br><font color="#ffffff" size="2">plus G.N.C. AÑO: 2014 - Foto 9</font></p>
+            <img src="lightbox/IMAGEN06_9.jpg" alt=""/>
             <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria6','IMAGEN06_1')"><i class="fa fa-angle-right"></i></a>
             <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
         </div>
-      
-</div> 
+</div>
+
 <!-- GALERIA 07 --> 
  <div id="subgaleria7" class="lightbox">
     
@@ -984,52 +1126,95 @@ function closeLightbox() {
         </div>
        
  </div> 
-<!-- GALERIA 08 --> 
+<!-- GALERIA 08  -->
  <div id="subgaleria8" class="lightbox">
     
         <div id="IMAGEN08_1" class="lightbox-item">
-            <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria8','IMAGEN08_6')"><i class="fa fa-angle-left"></i></a>
-            <p><font color="#ffffff" size="5"><B>FIAT MOBI EASY 1.0</B></font><br><font color="#ffffff" size="2">AÑO: 2016 - Foto 1</font></p>
+            <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria8','IMAGEN08_12')"><i class="fa fa-angle-left"></i></a>
+            <p><font color="#ffffff" size="5"><B>Cruze LT 1.4 M/T 5P</B></font><br><font color="#ffffff" size="2">AÑO: 2017 - Foto 1</font></p>
             <img src="lightbox/IMAGEN08_1.jpg" alt=""/>
             <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria8','IMAGEN08_2')"><i class="fa fa-angle-right"></i></a>
             <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
         </div>
         <div id="IMAGEN08_2" class="lightbox-item">
             <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria8','IMAGEN08_1')"><i class="fa fa-angle-left"></i></a>
-            <p><font color="#ffffff" size="5"><B>FIAT MOBI EASY 1.0</B></font><br><font color="#ffffff" size="2">AÑO: 2016 - Foto 2</font></p>
+            <p><font color="#ffffff" size="5"><B>Cruze LT 1.4 M/T 5P</B></font><br><font color="#ffffff" size="2">AÑO: 2017 - Foto 2</font></p>
             <img src="lightbox/IMAGEN08_2.jpg" alt=""/>
             <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria8','IMAGEN08_3')"><i class="fa fa-angle-right"></i></a>
             <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
         </div>
         <div id="IMAGEN08_3" class="lightbox-item">
             <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria8','IMAGEN08_2')"><i class="fa fa-angle-left"></i></a>
-            <p><font color="#ffffff" size="5"><B>FIAT MOBI EASY 1.0</B></font><br><font color="#ffffff" size="2">AÑO: 2016 - Foto 3</font></p>
+            <p><font color="#ffffff" size="5"><B>Cruze LT 1.4 M/T 5P</B></font><br><font color="#ffffff" size="2">AÑO: 2017 - Foto 3</font></p>
             <img src="lightbox/IMAGEN08_3.jpg" alt=""/>
             <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria8','IMAGEN08_4')"><i class="fa fa-angle-right"></i></a>
             <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
         </div>
         <div id="IMAGEN08_4" class="lightbox-item">
             <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria8','IMAGEN08_3')"><i class="fa fa-angle-left"></i></a>
-            <p><font color="#ffffff" size="5"><B>FIAT MOBI EASY 1.0</B></font><br><font color="#ffffff" size="2">AÑO: 2016 - Foto 4</font></p>
+            <p><font color="#ffffff" size="5"><B>Cruze LT 1.4 M/T 5P</B></font><br><font color="#ffffff" size="2">AÑO: 2017 - Foto 4</font></p>
             <img src="lightbox/IMAGEN08_4.jpg" alt=""/>
             <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria8','IMAGEN08_5')"><i class="fa fa-angle-right"></i></a>
             <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
         </div>
         <div id="IMAGEN08_5" class="lightbox-item">
             <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria8','IMAGEN08_4')"><i class="fa fa-angle-left"></i></a>
-            <p><font color="#ffffff" size="5"><B>FIAT MOBI EASY 1.0</B></font><br><font color="#ffffff" size="2">AÑO: 2016 - Foto 5</font></p>
+            <p><font color="#ffffff" size="5"><B>Cruze LT 1.4 M/T 5P</B></font><br><font color="#ffffff" size="2">AÑO: 2017 - Foto 5</font></p>
             <img src="lightbox/IMAGEN08_5.jpg" alt=""/>
             <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria8','IMAGEN08_6')"><i class="fa fa-angle-right"></i></a>
             <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
         </div>
         <div id="IMAGEN08_6" class="lightbox-item">
             <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria8','IMAGEN08_5')"><i class="fa fa-angle-left"></i></a>
-            <p><font color="#ffffff" size="5"><B>FIAT MOBI EASY 1.0</B></font><br><font color="#ffffff" size="2">AÑO: 2016 - Foto 6</font></p>
+            <p><font color="#ffffff" size="5"><B>Cruze LT 1.4 M/T 5P</B></font><br><font color="#ffffff" size="2">AÑO: 2017 - Foto 6</font></p>
             <img src="lightbox/IMAGEN08_6.jpg" alt=""/>
-            <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria8','IMAGEN08_1')"><i class="fa fa-angle-right"></i></a>
+            <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria8','IMAGEN08_7')"><i class="fa fa-angle-right"></i></a>
             <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
         </div>
- </div> 
+        <div id="IMAGEN08_7" class="lightbox-item">
+            <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria8','IMAGEN08_6')"><i class="fa fa-angle-left"></i></a>
+            <p><font color="#ffffff" size="5"><B>Cruze LT 1.4 M/T 5P</B></font><br><font color="#ffffff" size="2">AÑO: 2017 - Foto 7</font></p>
+            <img src="lightbox/IMAGEN08_7.jpg" alt=""/>
+            <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria8','IMAGEN08_8')"><i class="fa fa-angle-right"></i></a>
+            <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
+        </div>
+        <div id="IMAGEN08_8" class="lightbox-item">
+            <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria8','IMAGEN08_7')"><i class="fa fa-angle-left"></i></a>
+            <p><font color="#ffffff" size="5"><B>Cruze LT 1.4 M/T 5P</B></font><br><font color="#ffffff" size="2">AÑO: 2017 - Foto 8</font></p>
+            <img src="lightbox/IMAGEN08_8.jpg" alt=""/>
+            <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria8','IMAGEN08_9')"><i class="fa fa-angle-right"></i></a>
+            <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
+        </div>
+        <div id="IMAGEN08_9" class="lightbox-item">
+            <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria8','IMAGEN08_8')"><i class="fa fa-angle-left"></i></a>
+            <p><font color="#ffffff" size="5"><B>Cruze LT 1.4 M/T 5P</B></font><br><font color="#ffffff" size="2">AÑO: 2017 - Foto 9</font></p>
+            <img src="lightbox/IMAGEN08_9.jpg" alt=""/>
+            <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria8','IMAGEN08_10')"><i class="fa fa-angle-right"></i></a>
+            <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
+        </div>
+        <div id="IMAGEN08_10" class="lightbox-item">
+            <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria8','IMAGEN08_9')"><i class="fa fa-angle-left"></i></a>
+            <p><font color="#ffffff" size="5"><B>Cruze LT 1.4 M/T 5P</B></font><br><font color="#ffffff" size="2">AÑO: 2017 - Foto 10</font></p>
+            <img src="lightbox/IMAGEN08_10.jpg" alt=""/>
+            <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria8','IMAGEN08_11')"><i class="fa fa-angle-right"></i></a>
+            <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
+        </div> 
+        <div id="IMAGEN08_11" class="lightbox-item">
+            <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria8','IMAGEN08_10')"><i class="fa fa-angle-left"></i></a>
+            <p><font color="#ffffff" size="5"><B>Cruze LT 1.4 M/T 5P</B></font><br><font color="#ffffff" size="2">AÑO: 2017 - Foto 11</font></p>
+            <img src="lightbox/IMAGEN08_11.jpg" alt=""/>
+            <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria8','IMAGEN08_12')"><i class="fa fa-angle-right"></i></a>
+            <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
+        </div> 
+        <div id="IMAGEN08_12" class="lightbox-item">
+            <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria8','IMAGEN08_11')"><i class="fa fa-angle-left"></i></a>
+            <p><font color="#ffffff" size="5"><B>Cruze LT 1.4 M/T 5P</B></font><br><font color="#ffffff" size="2">AÑO: 2017 - Foto 12</font></p>
+            <img src="lightbox/IMAGEN08_12.jpg" alt=""/>
+            <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria8','IMAGEN08_1')"><i class="fa fa-angle-right"></i></a>
+            <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
+        </div> 
+ </div>
+
 <!-- GALERIA 09 --> 
  <div id="subgaleria9" class="lightbox">
     
@@ -1063,31 +1248,102 @@ function closeLightbox() {
         </div>
         
  </div>  
-<!-- GALERIA 10 --> 
+<!-- GALERIA 10 -->
  <div id="subgaleria10" class="lightbox">
     
         <div id="IMAGEN10_1" class="lightbox-item">
-            <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria10','IMAGEN10_3')"><i class="fa fa-angle-left"></i></a>
-            <p><font color="#ffffff" size="5"><B>FORD ECOSPORT SE 1.6</B></font><br><font color="#ffffff" size="2">AÑO: 2014 - Foto 1</font></p>
+            <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria10','IMAGEN10_13')"><i class="fa fa-angle-left"></i></a>
+            <p><font color="#ffffff" size="5"><B>Fiat Cronos 1.3 drive GSE Design</B></font><br><font color="#ffffff" size="2">AÑO 2022 impecable !! - Foto 1</font></p>
             <img src="lightbox/IMAGEN10_1.jpg" alt=""/>
             <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria10','IMAGEN10_2')"><i class="fa fa-angle-right"></i></a>
             <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
         </div>
         <div id="IMAGEN10_2" class="lightbox-item">
             <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria10','IMAGEN10_1')"><i class="fa fa-angle-left"></i></a>
-            <p><font color="#ffffff" size="5"><B>FORD ECOSPORT SE 1.6</B></font><br><font color="#ffffff" size="2">AÑO: 2014 - Foto 2</font></p>
+            <p><font color="#ffffff" size="5"><B>Fiat Cronos 1.3 drive GSE Design</B></font><br><font color="#ffffff" size="2">AÑO 2022 impecable !! - Foto 2</font></p>
             <img src="lightbox/IMAGEN10_2.jpg" alt=""/>
             <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria10','IMAGEN10_3')"><i class="fa fa-angle-right"></i></a>
             <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
         </div>
         <div id="IMAGEN10_3" class="lightbox-item">
             <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria10','IMAGEN10_2')"><i class="fa fa-angle-left"></i></a>
-            <p><font color="#ffffff" size="5"><B>FORD ECOSPORT SE 1.6</B></font><br><font color="#ffffff" size="2">AÑO: 2014 - Foto 3</font></p>
+            <p><font color="#ffffff" size="5"><B>Fiat Cronos 1.3 drive GSE Design</B></font><br><font color="#ffffff" size="2">AÑO 2022 impecable !! - Foto 3</font></p>
             <img src="lightbox/IMAGEN10_3.jpg" alt=""/>
+            <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria10','IMAGEN10_4')"><i class="fa fa-angle-right"></i></a>
+            <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
+        </div>     
+        <div id="IMAGEN10_4" class="lightbox-item">
+            <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria10','IMAGEN10_3')"><i class="fa fa-angle-left"></i></a>
+            <p><font color="#ffffff" size="5"><B>Fiat Cronos 1.3 drive GSE Design</B></font><br><font color="#ffffff" size="2">AÑO 2022 impecable !! - Foto 4</font></p>
+            <img src="lightbox/IMAGEN10_4.jpg" alt=""/>
+            <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria10','IMAGEN10_5')"><i class="fa fa-angle-right"></i></a>
+            <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
+        </div>     
+        <div id="IMAGEN10_5" class="lightbox-item">
+            <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria10','IMAGEN10_4')"><i class="fa fa-angle-left"></i></a>
+            <p><font color="#ffffff" size="5"><B>Fiat Cronos 1.3 drive GSE Design</B></font><br><font color="#ffffff" size="2">AÑO 2022 impecable !! - Foto 5</font></p>
+            <img src="lightbox/IMAGEN10_5.jpg" alt=""/>
+            <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria10','IMAGEN10_6')"><i class="fa fa-angle-right"></i></a>
+            <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
+        </div>
+        <div id="IMAGEN10_6" class="lightbox-item">
+            <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria10','IMAGEN10_5')"><i class="fa fa-angle-left"></i></a>
+            <p><font color="#ffffff" size="5"><B>Fiat Cronos 1.3 drive GSE Design</B></font><br><font color="#ffffff" size="2">AÑO 2022 impecable !! - Foto 6</font></p>
+            <img src="lightbox/IMAGEN10_6.jpg" alt=""/>
+            <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria10','IMAGEN10_7')"><i class="fa fa-angle-right"></i></a>
+            <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
+        </div>
+        <div id="IMAGEN10_7" class="lightbox-item">
+            <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria10','IMAGEN10_6')"><i class="fa fa-angle-left"></i></a>
+            <p><font color="#ffffff" size="5"><B>Fiat Cronos 1.3 drive GSE Design</B></font><br><font color="#ffffff" size="2">AÑO 2022 impecable !! - Foto 7</font></p>
+            <img src="lightbox/IMAGEN10_7.jpg" alt=""/>
+            <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria10','IMAGEN10_8')"><i class="fa fa-angle-right"></i></a>
+            <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
+        </div>
+        <div id="IMAGEN10_8" class="lightbox-item">
+            <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria10','IMAGEN10_7')"><i class="fa fa-angle-left"></i></a>
+            <p><font color="#ffffff" size="5"><B>Fiat Cronos 1.3 drive GSE Design</B></font><br><font color="#ffffff" size="2">AÑO 2022 impecable !! - Foto 8</font></p>
+            <img src="lightbox/IMAGEN10_8.jpg" alt=""/>
+            <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria10','IMAGEN10_9')"><i class="fa fa-angle-right"></i></a>
+            <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
+        </div>
+        <div id="IMAGEN10_9" class="lightbox-item">
+            <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria10','IMAGEN10_8')"><i class="fa fa-angle-left"></i></a>
+            <p><font color="#ffffff" size="5"><B>Fiat Cronos 1.3 drive GSE Design</B></font><br><font color="#ffffff" size="2">AÑO 2022 impecable !! - Foto 9</font></p>
+            <img src="lightbox/IMAGEN10_9.jpg" alt=""/>
+            <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria10','IMAGEN10_10')"><i class="fa fa-angle-right"></i></a>
+            <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
+        </div>
+        <div id="IMAGEN10_10" class="lightbox-item">
+            <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria10','IMAGEN10_9')"><i class="fa fa-angle-left"></i></a>
+            <p><font color="#ffffff" size="5"><B>Fiat Cronos 1.3 drive GSE Design</B></font><br><font color="#ffffff" size="2">AÑO 2022 impecable !! - Foto 10</font></p>
+            <img src="lightbox/IMAGEN10_10.jpg" alt=""/>
+            <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria10','IMAGEN10_11')"><i class="fa fa-angle-right"></i></a>
+            <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
+        </div>
+        <div id="IMAGEN10_11" class="lightbox-item">
+            <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria10','IMAGEN10_10')"><i class="fa fa-angle-left"></i></a>
+            <p><font color="#ffffff" size="5"><B>Fiat Cronos 1.3 drive GSE Design</B></font><br><font color="#ffffff" size="2">AÑO 2022 impecable !! - Foto 11</font></p>
+            <img src="lightbox/IMAGEN10_11.jpg" alt=""/>
+            <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria10','IMAGEN10_12')"><i class="fa fa-angle-right"></i></a>
+            <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
+        </div>
+        <div id="IMAGEN10_12" class="lightbox-item">
+            <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria10','IMAGEN10_11')"><i class="fa fa-angle-left"></i></a>
+            <p><font color="#ffffff" size="5"><B>Fiat Cronos 1.3 drive GSE Design</B></font><br><font color="#ffffff" size="2">AÑO 2022 impecable !! - Foto 12</font></p>
+            <img src="lightbox/IMAGEN10_12.jpg" alt=""/>
+            <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria10','IMAGEN10_13')"><i class="fa fa-angle-right"></i></a>
+            <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
+        </div>
+        <div id="IMAGEN10_13" class="lightbox-item">
+            <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria10','IMAGEN10_12')"><i class="fa fa-angle-left"></i></a>
+            <p><font color="#ffffff" size="5"><B>Fiat Cronos 1.3 drive GSE Design</B></font><br><font color="#ffffff" size="2">AÑO 2022 impecable !! - Foto 13</font></p>
+            <img src="lightbox/IMAGEN10_13.jpg" alt=""/>
             <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria10','IMAGEN10_1')"><i class="fa fa-angle-right"></i></a>
             <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
-        </div>               
+        </div>
  </div>  
+ 
 <!-- GALERIA 11 --> 
  <div id="subgaleria11" class="lightbox">
     
@@ -1106,67 +1362,102 @@ function closeLightbox() {
             <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
         </div>              
  </div>  
- <!-- GALERIA 12 --> 
+ <!-- GALERIA 12 >
  <div id="subgaleria12" class="lightbox">
     
         <div id="IMAGEN12_1" class="lightbox-item">
-            <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria12','IMAGEN12_8')"><i class="fa fa-angle-left"></i></a>
-            <p><font color="#ffffff" size="5"><B>FORD FOCUS S 1.6</B></font><br><font color="#ffffff" size="2">5 PUERTAS.AÑO: 2014 - Foto 1</font></p>
+            <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria12','IMAGEN12_13')"><i class="fa fa-angle-left"></i></a>
+            <p><font color="#ffffff" size="5"><B>FORD FOCUS EXE TREND 1.6 NAFTA</B></font><br><font color="#ffffff" size="2">AÑO: 2012 - Foto 1</font></p>
             <img src="lightbox/IMAGEN12_1.jpg" alt=""/>
             <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria12','IMAGEN12_2')"><i class="fa fa-angle-right"></i></a>
             <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
         </div>
         <div id="IMAGEN12_2" class="lightbox-item">
             <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria12','IMAGEN12_1')"><i class="fa fa-angle-left"></i></a>
-            <p><font color="#ffffff" size="5"><B>FORD FOCUS S 1.6</B></font><br><font color="#ffffff" size="2">5 PUERTAS.AÑO: 2014 - Foto 2</font></p>
+            <p><font color="#ffffff" size="5"><B>FORD FOCUS EXE TREND 1.6 NAFTA</B></font><br><font color="#ffffff" size="2">AÑO: 2012 - Foto 2</font></p>
             <img src="lightbox/IMAGEN12_2.jpg" alt=""/>
             <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria12','IMAGEN12_3')"><i class="fa fa-angle-right"></i></a>
             <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
         </div>
         <div id="IMAGEN12_3" class="lightbox-item">
             <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria12','IMAGEN12_2')"><i class="fa fa-angle-left"></i></a>
-            <p><font color="#ffffff" size="5"><B>FORD FOCUS S 1.6</B></font><br><font color="#ffffff" size="2">5 PUERTAS.AÑO: 2014 - Foto 3</font></p>
+            <p><font color="#ffffff" size="5"><B>FORD FOCUS EXE TREND 1.6 NAFTA</B></font><br><font color="#ffffff" size="2">AÑO: 2012 - Foto 3</font></p>
             <img src="lightbox/IMAGEN12_3.jpg" alt=""/>
             <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria12','IMAGEN12_4')"><i class="fa fa-angle-right"></i></a>
             <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
         </div>
         <div id="IMAGEN12_4" class="lightbox-item">
             <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria12','IMAGEN12_3')"><i class="fa fa-angle-left"></i></a>
-            <p><font color="#ffffff" size="5"><B>FORD FOCUS S 1.6</B></font><br><font color="#ffffff" size="2">5 PUERTAS.AÑO: 2014 - Foto 4</font></p>
+            <p><font color="#ffffff" size="5"><B>FORD FOCUS EXE TREND 1.6 NAFTA</B></font><br><font color="#ffffff" size="2">AÑO: 2012 - Foto 4</font></p>
             <img src="lightbox/IMAGEN12_4.jpg" alt=""/>
             <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria12','IMAGEN12_5')"><i class="fa fa-angle-right"></i></a>
             <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
         </div>
         <div id="IMAGEN12_5" class="lightbox-item">
             <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria12','IMAGEN12_4')"><i class="fa fa-angle-left"></i></a>
-            <p><font color="#ffffff" size="5"><B>FORD FOCUS S 1.6</B></font><br><font color="#ffffff" size="2">5 PUERTAS.AÑO: 2014 - Foto 5</font></p>
+            <p><font color="#ffffff" size="5"><B>FORD FOCUS EXE TREND 1.6 NAFTA</B></font><br><font color="#ffffff" size="2">AÑO: 2012 - Foto 5</font></p>
             <img src="lightbox/IMAGEN12_5.jpg" alt=""/>
             <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria12','IMAGEN12_6')"><i class="fa fa-angle-right"></i></a>
             <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
         </div>
         <div id="IMAGEN12_6" class="lightbox-item">
             <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria12','IMAGEN12_5')"><i class="fa fa-angle-left"></i></a>
-            <p><font color="#ffffff" size="5"><B>FORD FOCUS S 1.6</B></font><br><font color="#ffffff" size="2">5 PUERTAS.AÑO: 2014 - Foto 6</font></p>
+            <p><font color="#ffffff" size="5"><B>FORD FOCUS EXE TREND 1.6 NAFTA</B></font><br><font color="#ffffff" size="2">AÑO: 2012 - Foto 6</font></p>
             <img src="lightbox/IMAGEN12_6.jpg" alt=""/>
             <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria12','IMAGEN12_7')"><i class="fa fa-angle-right"></i></a>
             <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
         </div>
        <div id="IMAGEN12_7" class="lightbox-item">
             <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria12','IMAGEN12_6')"><i class="fa fa-angle-left"></i></a>
-            <p><font color="#ffffff" size="5"><B>FORD FOCUS S 1.6</B></font><br><font color="#ffffff" size="2">5 PUERTAS.AÑO: 2014 - Foto 7</font></p>
+            <p><font color="#ffffff" size="5"><B>FORD FOCUS EXE TREND 1.6 NAFTA</B></font><br><font color="#ffffff" size="2">AÑO: 2012 - Foto 7</font></p>
             <img src="lightbox/IMAGEN12_7.jpg" alt=""/>
             <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria12','IMAGEN12_8')"><i class="fa fa-angle-right"></i></a>
             <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
         </div>
         <div id="IMAGEN12_8" class="lightbox-item">
             <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria12','IMAGEN12_7')"><i class="fa fa-angle-left"></i></a>
-            <p><font color="#ffffff" size="5"><B>FORD FOCUS S 1.6</B></font><br><font color="#ffffff" size="2">5 PUERTAS.AÑO: 2014 - Foto 8</font></p>
+            <p><font color="#ffffff" size="5"><B>FORD FOCUS EXE TREND 1.6 NAFTA</B></font><br><font color="#ffffff" size="2">AÑO: 2012 - Foto 8</font></p>
             <img src="lightbox/IMAGEN12_8.jpg" alt=""/>
             <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria12','IMAGEN12_1')"><i class="fa fa-angle-right"></i></a>
             <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
         </div>
-      
+        <div id="IMAGEN12_9" class="lightbox-item">
+            <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria12','IMAGEN12_8')"><i class="fa fa-angle-left"></i></a>
+            <p><font color="#ffffff" size="5"><B>FORD FOCUS EXE TREND 1.6 NAFTA</B></font><br><font color="#ffffff" size="2">AÑO: 2012 - Foto 9</font></p>
+            <img src="lightbox/IMAGEN12_9.jpg" alt=""/>
+            <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria12','IMAGEN12_10')"><i class="fa fa-angle-right"></i></a>
+            <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
+        </div>
+        <div id="IMAGEN12_10" class="lightbox-item">
+            <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria12','IMAGEN12_9')"><i class="fa fa-angle-left"></i></a>
+            <p><font color="#ffffff" size="5"><B>FORD FOCUS EXE TREND 1.6 NAFTA</B></font><br><font color="#ffffff" size="2">AÑO: 2012 - Foto 10</font></p>
+            <img src="lightbox/IMAGEN12_10.jpg" alt=""/>
+            <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria12','IMAGEN12_11')"><i class="fa fa-angle-right"></i></a>
+            <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
+        </div>
+        <div id="IMAGEN12_11" class="lightbox-item">
+            <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria12','IMAGEN12_10')"><i class="fa fa-angle-left"></i></a>
+            <p><font color="#ffffff" size="5"><B>FORD FOCUS EXE TREND 1.6 NAFTA</B></font><br><font color="#ffffff" size="2">AÑO: 2012 - Foto 11</font></p>
+            <img src="lightbox/IMAGEN12_11.jpg" alt=""/>
+            <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria12','IMAGEN12_12')"><i class="fa fa-angle-right"></i></a>
+            <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
+        </div>
+        <div id="IMAGEN12_12" class="lightbox-item">
+            <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria12','IMAGEN12_11')"><i class="fa fa-angle-left"></i></a>
+            <p><font color="#ffffff" size="5"><B>FORD FOCUS EXE TREND 1.6 NAFTA</B></font><br><font color="#ffffff" size="2">AÑO: 2012 - Foto 12</font></p>
+            <img src="lightbox/IMAGEN12_12.jpg" alt=""/>
+            <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria12','IMAGEN12_13')"><i class="fa fa-angle-right"></i></a>
+            <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
+        </div>
+        <div id="IMAGEN12_13" class="lightbox-item">
+            <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria12','IMAGEN12_12')"><i class="fa fa-angle-left"></i></a>
+            <p><font color="#ffffff" size="5"><B>FORD FOCUS EXE TREND 1.6 NAFTA</B></font><br><font color="#ffffff" size="2">AÑO: 2012 - Foto 13</font></p>
+            <img src="lightbox/IMAGEN12_13.jpg" alt=""/>
+            <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria12','IMAGEN12_1')"><i class="fa fa-angle-right"></i></a>
+            <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
+        </div>
 </div> 
+ <-->
   <!-- GALERIA 13 --> 
  <div id="subgaleria13" class="lightbox">
     
@@ -1659,7 +1950,7 @@ function closeLightbox() {
             <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
         </div>
  </div>
-  <!-- GALERIA 20 --> 
+  <!-- GALERIA 20   LIBRE PARA OTRO AUTO !!!!! > 
  <div id="subgaleria20" class="lightbox">
     
         <div id="IMAGEN20_1" class="lightbox-item">
@@ -1768,6 +2059,7 @@ function closeLightbox() {
             <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
         </div>
 </div> 
+  <-->
 <!-- GALERIA 21 --> 
  <div id="subgaleria21" class="lightbox">
     
@@ -1897,7 +2189,7 @@ function closeLightbox() {
             <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
         </div>
 </div> 
-  <!-- GALERIA 23 --> 
+  <!-- GALERIA 23 > 
  <div id="subgaleria23" class="lightbox">
     
         <div id="IMAGEN23_1" class="lightbox-item">
@@ -1978,6 +2270,7 @@ function closeLightbox() {
             <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
         </div>
  </div> 
+ <-->
 <!-- GALERIA 24 --> 
  <div id="subgaleria24" class="lightbox">
     
@@ -2088,36 +2381,92 @@ function closeLightbox() {
  <div id="subgaleria26" class="lightbox">
     
         <div id="IMAGEN26_1" class="lightbox-item">
-            <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria26','IMAGEN26_4')"><i class="fa fa-angle-left"></i></a>
-            <p><font color="#ffffff" size="5"><B>PEUGEOT 408  ALLURE 2.0</B></font><br><font color="#ffffff" size="2">AÑO: 2011 - Foto 1</font></p>
+            <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria26','IMAGEN26_12')"><i class="fa fa-angle-left"></i></a>
+            <p><font color="#ffffff" size="5"><B>Ford Focus S 1.6 Sedan M/T</B></font><br><font color="#ffffff" size="2">AÑO: 2016 - Foto 1</font></p>
             <img src="lightbox/IMAGEN26_1.jpg" alt=""/>
             <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria26','IMAGEN26_2')"><i class="fa fa-angle-right"></i></a>
             <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
         </div>
         <div id="IMAGEN26_2" class="lightbox-item">
             <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria26','IMAGEN26_1')"><i class="fa fa-angle-left"></i></a>
-            <p><font color="#ffffff" size="5"><B>PEUGEOT 408  ALLURE 2.0</B></font><br><font color="#ffffff" size="2">AÑO: 2011 - Foto 2</font></p>
+            <p><font color="#ffffff" size="5"><B>Ford Focus S 1.6 Sedan M/T</B></font><br><font color="#ffffff" size="2">AÑO: 2016 - Foto 2</font></p>
             <img src="lightbox/IMAGEN26_2.jpg" alt=""/>
             <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria26','IMAGEN26_3')"><i class="fa fa-angle-right"></i></a>
             <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
         </div>
         <div id="IMAGEN26_3" class="lightbox-item">
             <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria26','IMAGEN26_2')"><i class="fa fa-angle-left"></i></a>
-            <p><font color="#ffffff" size="5"><B>PEUGEOT 408  ALLURE 2.0</B></font><br><font color="#ffffff" size="2">AÑO: 2011 - Foto 3</font></p>
+            <p><font color="#ffffff" size="5"><B>Ford Focus S 1.6 Sedan M/T</B></font><br><font color="#ffffff" size="2">AÑO: 2016 - Foto 3</font></p>
             <img src="lightbox/IMAGEN26_3.jpg" alt=""/>
             <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria26','IMAGEN26_4')"><i class="fa fa-angle-right"></i></a>
             <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
         </div>
         <div id="IMAGEN26_4" class="lightbox-item">
             <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria26','IMAGEN26_3')"><i class="fa fa-angle-left"></i></a>
-            <p><font color="#ffffff" size="5"><B>PEUGEOT 408  ALLURE 2.0</B></font><br><font color="#ffffff" size="2">AÑO: 2011 - Foto 4</font></p>
+            <p><font color="#ffffff" size="5"><B>Ford Focus S 1.6 Sedan M/T</B></font><br><font color="#ffffff" size="2">AÑO: 2016 - Foto 4</font></p>
             <img src="lightbox/IMAGEN26_4.jpg" alt=""/>
+            <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria26','IMAGEN26_5')"><i class="fa fa-angle-right"></i></a>
+            <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
+        </div>
+        <div id="IMAGEN26_5" class="lightbox-item">
+            <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria26','IMAGEN26_4')"><i class="fa fa-angle-left"></i></a>
+            <p><font color="#ffffff" size="5"><B>Ford Focus S 1.6 Sedan M/T</B></font><br><font color="#ffffff" size="2">AÑO: 2016 - Foto 5</font></p>
+            <img src="lightbox/IMAGEN26_5.jpg" alt=""/>
+            <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria26','IMAGEN26_6')"><i class="fa fa-angle-right"></i></a>
+            <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
+        </div>
+        <div id="IMAGEN26_6" class="lightbox-item">
+            <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria26','IMAGEN26_5')"><i class="fa fa-angle-left"></i></a>
+            <p><font color="#ffffff" size="5"><B>Ford Focus S 1.6 Sedan M/T</B></font><br><font color="#ffffff" size="2">AÑO: 2016 - Foto 6</font></p>
+            <img src="lightbox/IMAGEN26_6.jpg" alt=""/>
+            <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria26','IMAGEN26_7')"><i class="fa fa-angle-right"></i></a>
+            <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
+        </div>
+        <div id="IMAGEN26_7" class="lightbox-item">
+            <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria26','IMAGEN26_6')"><i class="fa fa-angle-left"></i></a>
+            <p><font color="#ffffff" size="5"><B>Ford Focus S 1.6 Sedan M/T</B></font><br><font color="#ffffff" size="2">AÑO: 2016 - Foto 7</font></p>
+            <img src="lightbox/IMAGEN26_7.jpg" alt=""/>
+            <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria26','IMAGEN26_8')"><i class="fa fa-angle-right"></i></a>
+            <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
+        </div>
+        <div id="IMAGEN26_8" class="lightbox-item">
+            <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria26','IMAGEN26_7')"><i class="fa fa-angle-left"></i></a>
+            <p><font color="#ffffff" size="5"><B>Ford Focus S 1.6 Sedan M/T</B></font><br><font color="#ffffff" size="2">AÑO: 2016 - Foto 8</font></p>
+            <img src="lightbox/IMAGEN26_8.jpg" alt=""/>
+            <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria26','IMAGEN26_9')"><i class="fa fa-angle-right"></i></a>
+            <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
+        </div>
+        <div id="IMAGEN26_9" class="lightbox-item">
+            <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria26','IMAGEN26_8')"><i class="fa fa-angle-left"></i></a>
+            <p><font color="#ffffff" size="5"><B>Ford Focus S 1.6 Sedan M/T</B></font><br><font color="#ffffff" size="2">AÑO: 2016 - Foto 9</font></p>
+            <img src="lightbox/IMAGEN26_9.jpg" alt=""/>
+            <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria26','IMAGEN26_10')"><i class="fa fa-angle-right"></i></a>
+            <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
+        </div>
+        <div id="IMAGEN26_10" class="lightbox-item">
+            <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria26','IMAGEN26_9')"><i class="fa fa-angle-left"></i></a>
+            <p><font color="#ffffff" size="5"><B>Ford Focus S 1.6 Sedan M/T</B></font><br><font color="#ffffff" size="2">AÑO: 2016 - Foto 10</font></p>
+            <img src="lightbox/IMAGEN26_10.jpg" alt=""/>
+            <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria26','IMAGEN26_11')"><i class="fa fa-angle-right"></i></a>
+            <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
+        </div>
+        <div id="IMAGEN26_11" class="lightbox-item">
+            <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria26','IMAGEN26_10')"><i class="fa fa-angle-left"></i></a>
+            <p><font color="#ffffff" size="5"><B>Ford Focus S 1.6 Sedan M/T</B></font><br><font color="#ffffff" size="2">AÑO: 2016 - Foto 11</font></p>
+            <img src="lightbox/IMAGEN26_11.jpg" alt=""/>
+            <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria26','IMAGEN26_12')"><i class="fa fa-angle-right"></i></a>
+            <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
+        </div>
+        <div id="IMAGEN26_12" class="lightbox-item">
+            <a href="javascript:void(0)" class="prev" onclick="showImage('subgaleria26','IMAGEN26_11')"><i class="fa fa-angle-left"></i></a>
+            <p><font color="#ffffff" size="5"><B>Ford Focus S 1.6 Sedan M/T</B></font><br><font color="#ffffff" size="2">AÑO: 2016 - Foto 12</font></p>
+            <img src="lightbox/IMAGEN26_12.jpg" alt=""/>
             <a href="javascript:void(0)" class="next" onclick="showImage('subgaleria26','IMAGEN26_1')"><i class="fa fa-angle-right"></i></a>
             <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
         </div>
-       
 </div> 
- <!-- GALERIA 27 -->
+
+ <!-- GALERIA 27 >
     <div id="subgaleria27" class="lightbox">
     
         <div id="IMAGEN27_1" class="lightbox-item">
@@ -2163,15 +2512,67 @@ function closeLightbox() {
             <a href="#" class="close" onclick="closeLightbox()"><i class="fa-window-close fa-1x">Cerrar</i></a>
         </div>
    </div>
-
-<a href="#" id="scroll-to-top" class="dmtop global-radius"><i class="fa fa-angle-up"></i></a>
-
+   <-->
+ 
+ 
+ 
+ 
+ 
+  <!-- Contact Start 
+  
+    <div class="container-fluid py-5">
+        <p><font color="#ffffff" size="5"><B>Consultanos por esta via si deseas,</B></font><font color="#ffffff" size="2"><br>aunque te esperamos nos visites para brindarte todos los detalles !!</font></p>
+        <div class="container" style="max-width: 900px;">
+            <div class="row">
+                <div class="col-12">
+                    <div class="contact-form">
+                        <div id="success"></div>
+                        <form name="sentMessage" id="contactForm" novalidate="novalidate" action="send_mail.php" method="POST">
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <div class="control-group">
+                                        <input type="text" class="form-control" id="name" placeholder="Su Nombre" required="required" data-validation-required-message="Ingrese aqui su Nombre" />
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="control-group">
+                                        <input type="email" class="form-control" id="email" placeholder="Su Email" required="required" data-validation-required-message="Ingrese su correo electronico" />
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <input type="text" class="form-control" id="subject" placeholder="Subject" required="required" data-validation-required-message="Escriba aqui el motivo" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="control-group">
+                                <textarea class="form-control" rows="6" id="message" placeholder="Message" required="required" data-validation-required-message="Escriba aqui su mensaje"></textarea>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div>
+                                <button class="button btn-light btn-brd"  type="submit" id="sendMessageButton">ENVIAR</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </div>    
+     Contact End -->
+ <a href="#" id="scroll-to-top" class="dmtop global-radius"><i class="fa fa-angle-up"></i></a>  
+ 
+   
     <!-- ALL JS FILES -->
     <script src="js/all.js"></script>
     <!-- ALL PLUGINS -->
     <script src="js/custom.js"></script>
     <script src="js/portfolio.js"></script>
     <script src="js/hoverdir.js"></script>  
-
+    <!-- Contact Javascript File -->
+    <script src="mail/jqBootstrapValidation.min.js"></script>
+    <script src="mail/contact.js"></script>
+ 
 </body>
 </html>
