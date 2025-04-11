@@ -72,6 +72,9 @@
     </style>
     
     <script>
+        if (/Mobi|Android/i.test(navigator.userAgent)) {
+           alert("Para una mejor experiencia, activa el modo 'Sitio para ordenadores' en tu navegador.");
+        } 
        function Blink()  {
            var ElemsBlink = document.getElementsByTagName('blink');
            for(var i=0;i<ElemsBlink.length;i++)
