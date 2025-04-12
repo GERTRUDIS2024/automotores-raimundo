@@ -35,12 +35,14 @@
  
     <style>
        
-         .contacto-container {
+        
+        .contacto-container {
             width: 100%; /* Hace que el contenedor se ajuste al tamaño de la ventana */
           /*  display: flex; /* Si usas un layout de flexbox */
             justify-content: center; /* Centra las imágenes */
         }
-         
+        
+        
         .address-item{
 	float: left;
 	margin: 0 5px;
@@ -55,6 +57,28 @@
 	 padding: 15px 0px;
         }
         
+        
+        
+    .address-container {
+       display: flex;
+       flex-wrap: wrap;
+       justify-content: center;
+       gap: 20px;
+       padding: 20px;
+       width: 100%;
+       max-width: 1200px;
+       margin: 0 auto;
+    }
+
+/* 👇 Esto lo hace responsivo en celular */
+@media screen and (max-width: 768px) {
+    .address-item {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+}
+        
+    
         .address-icon i{
 	  font-size: 38px;
 	  color: #ff0000;
@@ -75,6 +99,7 @@
         if (/Mobi|Android/i.test(navigator.userAgent)) {
            alert("Para poder observar la pagina, activa el modo 'Sitio para ordenadores' en tu navegador.");
         } 
+        
        function Blink()  {
            var ElemsBlink = document.getElementsByTagName('blink');
            for(var i=0;i<ElemsBlink.length;i++)
