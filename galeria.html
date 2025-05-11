@@ -311,6 +311,40 @@
     }
 }
 
+ .hover-container {
+  position: relative;
+  display: inline-block;
+}
+
+.hover-container img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.texto-hover {
+  
+  position: absolute;
+  top: 0; /* también podés usar bottom: 0 si lo querés abajo */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* fondo oscuro semitransparente */
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none; /* evita que interfiera con el clic */
+ 
+}
+
+.hover-container:hover .texto-hover {
+  opacity: 1;
+}
+
     </style>
 
     <script>
@@ -616,95 +650,176 @@ function closeLightbox() {
     <div class="gallery-container">
       
         <a href= "javascript:void(0)" class="gallery-item" data-keywords="ChevroletUsado" onclick="showSubGallery('subgaleria1', 'IMAGEN01_1')">
-            <img src="galeria/Usado_Chevrolet_01.png" alt="SPIN BLANCA" >
+            <div class="hover-container">
+                <img src="galeria/Usado_Chevrolet_01.png" alt="SPIN BLANCA" >
+                <div class="texto-hover">Chevrolet SPIN<br>CLICK AQUI !!</div>
+            </div>
         </a>
         <a href="javascript:void(0)" class="gallery-item" data-keywords="FordUsado" onclick="showSubGallery('subgaleria3', 'IMAGEN03_1')">
-            <img src="galeria/Ford_Usado_01.png" alt="FIESTA ROJOMETALICO">
+            <div class="hover-container">
+                <img src="galeria/Ford_Usado_01.png" alt="FIESTA ROJOMETALICO">
+                <div class="texto-hover">Ford FIESTA<br>CLICK AQUI !!</div>
+            </div>
         </a>
         <a href= "javascript:void(0)"  class="gallery-item" data-keywords="RenaultUsado" onclick="showSubGallery('subgaleria4', 'IMAGEN04_1')">
-            <img src="galeria/Usado_Renault_01.png" alt="KANGOO">
+            <div class="hover-container">
+                <img src="galeria/Usado_Renault_01.png" alt="KANGOO">
+                <div class="texto-hover">Renault KANGOO<br>CLICK AQUI !!</div>
+            </div>
         </a> 
         <a href= "javascript:void(0)"  class="gallery-item" data-keywords="VWUsado" onclick="showSubGallery('subgaleria2', 'IMAGEN02_1')">
-            <img src="galeria/VolksWagen_Usado_02.png" alt="VOYAGE">
+            <div class="hover-container">
+                <img src="galeria/VolksWagen_Usado_02.png" alt="VOYAGE">
+                <div class="texto-hover">VolksWage VOYAGE<br>CLICK AQUI !!</div>
+            </div>
         </a> 
         <a href= "javascript:void(0)"  class="gallery-item" data-keywords="ChevroletUsado" onclick="showSubGallery('subgaleria5', 'IMAGEN05_1')">
-            <img src="galeria/Usado_Chevrolet_02.png" alt="CRUZE">
+            <div class="hover-container">
+                <img src="galeria/Usado_Chevrolet_02.png" alt="CRUZE">
+                <div class="texto-hover">Chevrolet CRUZE<br>CLICK AQUI !!</div>
+            </div>    
         </a> 
-        
+
         <a href= "javascript:void(0)"  class="gallery-item" data-keywords="RenaultUsado" onclick="showSubGallery('subgaleria6', 'IMAGEN06_1')">
-            <img src="galeria/Usado_Renault_02.png" alt="CLIO_GNC">
+           <div class="hover-container">
+                <img src="galeria/Usado_Renault_02.png" alt="CLIO_GNC">
+                <div class="texto-hover">Renault CLIO<br>CLICK AQUI !!</div>
+           </div>     
         </a> 
         
         <a href= "javascript:void(0)"  class="gallery-item" data-keywords="RenaultUsado" onclick="showSubGallery('subgaleria7', 'IMAGEN07_1')">
-            <img src="galeria/Usado_Renault_03.png" alt="RenaultDuster">
+           <div class="hover-container">
+                <img src="galeria/Usado_Renault_03.png" alt="RenaultDuster">
+                <div class="texto-hover">Renault DUSTER<br>CLICK AQUI !!</div>
+           </div>     
         </a> 
         
         <a href= "javascript:void(0)"  class="gallery-item" data-keywords="ChevroletUsado" onclick="showSubGallery('subgaleria8', 'IMAGEN08_1')">
-            <img src="galeria/Usado_Chevrolet_03.png" alt="CRUZE ROJO">
+            <div class="hover-container">
+                 <img src="galeria/Usado_Chevrolet_03.png" alt="CRUZE ROJO">
+                 <div class="texto-hover">Chevrolet CRUZE<br>CLICK AQUI !!</div>
+            </div>     
         </a> 
         <a href= "javascript:void(0)"  class="gallery-item" data-keywords="FiatUsado" onclick="showSubGallery('subgaleria9', 'IMAGEN09_1')">
-            <img src="galeria/Usado_Fiat_02.png" alt="PUNTO">
+            <div class="hover-container">
+                 <img src="galeria/Usado_Fiat_02.png" alt="PUNTO">
+                 <div class="texto-hover">Fiat PUNTO<br>CLICK AQUI !!</div>
+            </div>     
         </a> 
         <a href= "javascript:void(0)"  class="gallery-item" data-keywords="FiatUsado" onclick="showSubGallery('subgaleria10', 'IMAGEN10_1')">
-            <img src="galeria/Usado_Fiat_01.png" alt="FIAT CRONOS">
+            <div class="hover-container">
+               <img src="galeria/Usado_Fiat_01.png" alt="FIAT CRONOS">
+               <div class="texto-hover">Fiat CRONOS<br>CLICK AQUI !!</div>
+            </div>   
         </a> 
         <a href= "javascript:void(0)"  class="gallery-item" data-keywords="ToyotaUsado" onclick="showSubGallery('subgaleria11', 'IMAGEN11_1')">
-            <img src="galeria/Usado_Toyota_01.png" alt="COROLLA BLANCO">
+            <div class="hover-container">
+                <img src="galeria/Usado_Toyota_01.png" alt="COROLLA BLANCO">
+                <div class="texto-hover">Toyota COROLLA<br>CLICK AQUI !!</div>
+            </div>    
         </a> 
         <a href= "javascript:void(0)"  class="gallery-item" data-keywords="ToyotaUsado" onclick="showSubGallery('subgaleria12', 'IMAGEN12_1')">
-            <img src="galeria/Usado_Toyota_02.png" alt="ETIOS BLANCO">
+            <div class="hover-container">
+                <img src="galeria/Usado_Toyota_02.png" alt="ETIOS BLANCO">
+                <div class="texto-hover">Toyota ETIOS<br>CLICK AQUI !!</div>
+            </div>    
         </a> 
         <a href= "javascript:void(0)"  class="gallery-item" data-keywords="FiatUsado" onclick="showSubGallery('subgaleria13', 'IMAGEN13_1')">
-            <img src="galeria/Usado_Fiat_03.png" alt="CRONOS GSC">
+            <div class="hover-container">
+                 <img src="galeria/Usado_Fiat_03.png" alt="CRONOS GSC">
+                 <div class="texto-hover">Fiat CRONOS<br>CLICK AQUI !!</div>
+            </div>     
         </a> 
        
         <a href= "javascript:void(0)"  class="gallery-item" data-keywords="PeugeotUsado" onclick="showSubGallery('subgaleria14', 'IMAGEN14_1')">
-            <img src="galeria/Usado_Peugeot_02.png" alt="207 BLANCO">
+            <div class="hover-container">
+                <img src="galeria/Usado_Peugeot_02.png" alt="207 BLANCO">
+                <div class="texto-hover">Peugeot 207<br>CLICK AQUI !!</div>
+            </div>    
         </a>
         <a href= "javascript:void(0)"  class="gallery-item" data-keywords="PeugeotUsado" onclick="showSubGallery('subgaleria15', 'IMAGEN15_1')">
-            <img src="galeria/Usado_Peugeot_03.png" alt="308 GRIS">
+            <div class="hover-container">
+                <img src="galeria/Usado_Peugeot_03.png" alt="308 GRIS">
+                 <div class="texto-hover">Peugeot 308<br>CLICK AQUI !!</div>
+            </div>     
         </a>
         <a href= "javascript:void(0)"  class="gallery-item" data-keywords="PeugeotUsado" onclick="showSubGallery('subgaleria16', 'IMAGEN16_1')">
-            <img src="galeria/Usado_Peugeot_04.png" alt="208 NEGRO">
+            <div class="hover-container">
+                <img src="galeria/Usado_Peugeot_04.png" alt="208 NEGRO">
+                <div class="texto-hover">Peugeot 208<br>CLICK AQUI !!</div>
+            </div>
         </a>
         <a href= "javascript:void(0)"  class="gallery-item" data-keywords="FiatUsado" onclick="showSubGallery('subgaleria17', 'IMAGEN17_1')">
-            <img src="galeria/Usado_Fiat_04.png" alt="FIAT PALIO BLANCO">
+            <div class="hover-container">
+                <img src="galeria/Usado_Fiat_04.png" alt="FIAT PALIO BLANCO">
+                <div class="texto-hover">Fiat PALIO<br>CLICK AQUI !!</div>
+            </div>    
         </a>
         <a href= "javascript:void(0)"  class="gallery-item" data-keywords="VWUsado" onclick="showSubGallery('subgaleria18', 'IMAGEN18_1')">
-            <img src="galeria/Usado_VolksWagen_01.png" alt="SURAN">
+            <div class="hover-container">
+                <img src="galeria/Usado_VolksWagen_01.png" alt="SURAN">
+                <div class="texto-hover">VolksWagen SURAN<br>CLICK AQUI !!</div>
+            </div>    
         </a>
         <a href= "javascript:void(0)"  class="gallery-item" data-keywords="VWUsado" onclick="showSubGallery('subgaleria19', 'IMAGEN19_1')">
-            <img src="galeria/Usado_VolksWagen_03.png" alt="VENTO">
+            <div class="hover-container">
+                <img src="galeria/Usado_VolksWagen_03.png" alt="VENTO">
+                <div class="texto-hover">VolksWagen VENTO<br>CLICK AQUI !!</div>
+            </div>    
         </a>
         <a href= "javascript:void(0)"  class="gallery-item" data-keywords="VWUsado" onclick="showSubGallery('subgaleria20', 'IMAGEN20_1')">
-            <img src="galeria/Usado_VolksWagen_04.png" alt="GOL TREND GRIS">
+            <div class="hover-container">
+               <img src="galeria/Usado_VolksWagen_04.png" alt="GOL TREND GRIS">
+               <div class="texto-hover">VolksWagen GOL TREND<br>CLICK AQUI !!</div>
+            </div>    
         </a>
         <a href= "javascript:void(0)"  class="gallery-item" data-keywords="FordUsado" onclick="showSubGallery('subgaleria21', 'IMAGEN21_1')">
-            <img src="galeria/Usado_Ford_01.png" alt="FOCUS CON G.N.C. BLANCO">
+           <div class="hover-container">
+                <img src="galeria/Usado_Ford_01.png" alt="FOCUS CON G.N.C. BLANCO">
+                <div class="texto-hover">Ford FOCUS<br>CLICK AQUI !!</div>
+           </div>    
         </a> 
         
          <a href= "javascript:void(0)"  class="gallery-item" data-keywords="FordUsado" onclick="showSubGallery('subgaleria22', 'IMAGEN22_1')">
-            <img src="galeria/Usado_Ford_05.png" alt="KA">
+            <div class="hover-container">
+                <img src="galeria/Usado_Ford_05.png" alt="KA">
+                <div class="texto-hover">Ford KA<br>CLICK AQUI !!</div>
+            </div>    
         </a> 
         <!-- LIBRE, SALE Usado_Chevrolet_04.png >
         <a href= "javascript:void(0)"  class="gallery-item" data-keywords="ChevroletUsado" onclick="showSubGallery('subgaleria23', 'IMAGEN23_1')">
-            <img src="galeria/Usado_Chevrolet_04.png" alt="PICKUP S10">
+           <div class="hover-container"> 
+               <img src="galeria/Usado_Chevrolet_04.png" alt="PICKUP S10">
+               <div class="texto-hover">Chevrolet PICKUP S10<br>CLICK AQUI !!
+            </div>
         </a>
         <-->
         <a href= "javascript:void(0)"  class="gallery-item" data-keywords="ChevroletUsado" onclick="showSubGallery('subgaleria24', 'IMAGEN24_1')">
-            <img src="galeria/Usado_Chevrolet_05.png" alt="TRACKER">
+            <div class="hover-container">
+                <img src="galeria/Usado_Chevrolet_05.png" alt="TRACKER">
+                <div class="texto-hover">Chevrolet TRACKER<br>CLICK AQUI !!</div>
+            </div>    
         </a>
         <a href= "javascript:void(0)"  class="gallery-item" data-keywords="ToyotaUsado" onclick="showSubGallery('subgaleria25', 'IMAGEN25_1')">
-            <img src="galeria/Usado_Toyota_03.png" alt="TOYOTA COROLLA XEI">
+            <div class="hover-container">
+                <img src="galeria/Usado_Toyota_03.png" alt="TOYOTA COROLLA XEI">
+                <div class="texto-hover">Toyota COROLLA XEI<br>CLICK AQUI !!</div>
+            </div>    
         </a>
         <!-- LIBRE, SALE Usado_Ford_02.png >
         <a href= "javascript:void(0)"  class="gallery-item" data-keywords="FordUsado" onclick="showSubGallery('subgaleria26', 'IMAGEN26_1')">
-            <img src="galeria/Usado_Ford_02.png" alt="FOCUS SEDAN">
+            <div class="hover-container">
+                 <img src="galeria/Usado_Ford_02.png" alt="FOCUS SEDAN">
+                 <div class="texto-hover">Ford FOCUS SEDAN<br>CLICK AQUI !!</div>
+            </div>
         </a>
         <-->
         <!-- GALERIA 25 LIBRE SALE CHEVROLET 06 >
         <a href= "javascript:void(0)"  class="gallery-item" data-keywords="ChevroletUsado" onclick="showSubGallery('subgaleria27', 'IMAGEN27_1')">
-            <img src="galeria/Usado_Chevrolet_06.png" alt="trackerpremiumblanca">
+             <div class="hover-container"> 
+                 <img src="galeria/Usado_Chevrolet_06.png" alt="trackerpremiumblanca">
+                 <div class="texto-hover">Chevrolet TRACKER PREM.<br>CLICK AQUI !!</div>
+        </div>
         </a>
         <-->
     </div>
