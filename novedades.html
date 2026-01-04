@@ -52,7 +52,8 @@
             font-family: Arial, sans-serif;
             margin:0;
             padding:0;
-            overflow:hidden;
+            overflow: auto;
+           /* overflow:hidden; */
             background-color:black;
             }
 
@@ -109,121 +110,44 @@
            
         }
         
-        
         section{
-           height:100%;
-           width:100%;
-           position:absolute ; 
-           background:radial-gradient(#333,#000);
-       }
-    .leaf{
-         position:fixed ;
-         width:100%;
-         height:100%;
-         top:0;
-         left:0;
-    }
-    .leaf div{
-        position:fixed ;
-        display:block ;
-    }
-    .leaf div:nth-child(1){
-        left:20%; 
-        animation:fall 15s linear infinite ;
-        animation-delay: -2s;
-    }
-    
-    .leaf div:nth-child(2){
-        left:70%; 
-        animation:fall 15s linear infinite ;
-        animation-delay: -4s;
-    }
-    .leaf div:nth-child(3){
-         left:10%; 
-         animation:fall 20s linear infinite ;
-         animation-delay: -7s;
-    }
-    .leaf div:nth-child(4){
-         left:50%; 
-         animation:fall 18s linear infinite ; 
-         animation-delay: -5s;
-    }
-    .leaf div:nth-child(5){
-        left:85%; 
-        animation:fall 14s linear infinite ;
-        animation-delay: -5s; 
-    }
-    .leaf div:nth-child(6){
-        left:15%; 
-        animation:fall 16s linear infinite ;
-        animation-delay: -10s;
-    }
-    .leaf div:nth-child(7){
-        left:90%; 
-        animation:fall 15s linear infinite ;
-        animation-delay: -4s;
-    }
-    .leaf div:nth-child(8){
-        left:35%; 
-        animation:fall 15s linear infinite ;
-        animation-delay: -2s;
-    }
-     .leaf div:nth-child(9){
-        left:55%; 
-        animation:fall 15s linear infinite ;
-        animation-delay: -2s;
-        
-    }
-     .leaf div:nth-child(10){
-        left:5%; 
-        animation:fall 15s linear infinite ;
-        animation-delay: -2s;
-    }
-@keyframes fall{
-    0%{
-        opacity:1;
-        top:-10%;
-        transform:translateX (20px) rotate(0deg);
-    }
-    20%{
-        opacity:0.8;
-        transform:translateX (-20px) rotate(45deg);
-    }
-    40%{
-
-        transform:translateX (-20px) rotate(90deg);
-    }
-    60%{
-        
-       transform:translateX (-20px) rotate(135deg); 
-    }
-    80%{
-    
-        transform:translateX (-20px) rotate(180deg);
-    }
-    100%{
-        
-        top:110%;
-        transform:translateX (-20px) rotate(225deg);
-    }
-    }
-.leaf1{
-    transform: rotateX(180deg);
-}
-.leaf2{
-    transform: rotateX(45deg);
-}
-h2{
-    position:absolute ;
-    top:40%;
+            width:100%;
+            position:relative;
+            background:radial-gradient(#333,#000);
+            padding-bottom: 50px;
+               }
+       
+ h2{
     width:100%;
-	  font-family: 'Courgette', cursive;
-    font-size:4em;
+    font-family: 'Courgette', cursive;
+    font-size:3em;
     text-align:center;
-    transform:translate ;
     color:#fff;
-    transform:translateY (-50%);
+    margin: 60px 0 30px 0;
+    position: relative;
+}  
+#scroll-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 9999;
+    display: none;       /* Empieza oculto */
+    background: #ff0000;
+    color: #fff;
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 24px;
 }
+#scroll-to-top:hover {
+    background: #ffcc00;
+    color: #000;
+}
+
+
  </style>   
  
 </head>
@@ -292,6 +216,7 @@ h2{
                         <li><a href="galeria.html" target="_blank">Galeria</a></li>
                         <li><a href = "index.html#contacto">Contactos</a></li>
                         <li><a href = "novedades.html">Novedades</a></li>
+                          <!-- <li><a href="Financiacion">Financiacion</a></li> -->
                     </ul>
                 </div>
             </div>
@@ -307,48 +232,14 @@ h2{
      </header>   
      <section>
      </div>
-     <div class="leaf">
-     <div><img src="images/imagen1.png" height="75px" width="75px"></img></div>
-     <div><img src="images/imagen2.png" height="75px" width="75px"></img></div>
-     <div><img src="images/imagen3.png" height="75px" width="75px" ></img></div>
-     <div><img src="images/imagen4.png" height="75px" width="75px"></img></div>
-     <div><img src="images/imagen5.png" height="75px" width="75px"></img></div>
-     <div><img src="images/imagen6.png" height="75px" width="75px"></img></div>
-     <div><img src="images/imagen7.png" height="75px" width="75px"></img></div>
-     <div><img src="images/imagen8.png" height="75px" width="75px"></img></div>   
-     <div><img src="images/imagen9.png" height="75px" width="75px"></img></div>  
-     <div><img src="images/imagen10.png" height="75px" width="75px"></img></div>
-     </div>
-     
-     <div class="leaf leaf1">
-     <div><img src="images/imagen1.png" height="75px" width="75px"></img></div>
-     <div><img src="images/imagen2.png" height="75px" width="75px"></img></div>
-     <div><img src="images/imagen3.png" height="75px" width="75px" ></img></div>
-     <div><img src="images/imagen4.png" height="75px" width="75px"></img></div>
-     <div><img src="images/imagen5.png" height="75px" width="75px"></img></div>
-     <div><img src="images/imagen6.png" height="75px" width="75px"></img></div>
-     <div><img src="images/imagen7.png" height="75px" width="75px"></img></div>
-     <div><img src="images/imagen8.png" height="75px" width="75px"></img></div>   
-     <div><img src="images/imagen9.png" height="75px" width="75px"></img></div> 
-     <div><img src="images/imagen10.png" height="75px" width="75px"></img></div>
-     </div>
-     
-     <div class="leaf leaf2">
-     <div><img src="images/imagen1.png" height="75px" width="75px"></img></div>
-     <div><img src="images/imagen2.png" height="75px" width="75px"></img></div>
-     <div><img src="images/imagen3.png" height="75px" width="75px" ></img></div>
-     <div><img src="images/imagen4.png" height="75px" width="75px"></img></div>
-     <div><img src="images/imagen5.png" height="75px" width="75px"></img></div>
-     <div><img src="images/imagen6.png" height="75px" width="75px"></img></div>
-     <div><img src="images/imagen7.png" height="75px" width="75px"></img></div>
-     <div><img src="images/imagen8.png" height="75px" width="75px"></img></div>   
-     <div><img src="images/imagen9.png" height="75px" width="75px"></img></div>   
-     <div><img src="images/imagen10.png" height="75px" width="75px"></img></div>
-     </div>
-    
-     
-     <DIV  style="display: flex; justify-content: space-between" class="gallery-container">  
-     
+  
+     <DIV class="gallery-container" style="
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+          gap: 20px;
+          ">
+         
       <a href= "javascript:void(0)"  class="gallery-item" >
             <div class="hover-container">
                  <p><font color="#ffffff" size="5"><B>GRACIAS CHICOS!! DISFRUTENLO !!</B></font><br><font color="#ffffff" size="2"> </font></p>
@@ -405,18 +296,48 @@ h2{
                 
             </div>
         </a>  
-         </a> 
+         
          <a href= "javascript:void(0)"  class="gallery-item" >
             <div class="hover-container" >
                  <p><font color="#ffffff" size="5"><B>MUCHAS GRACIAS AMIGOS !!</B></font><br><font color="#ffffff" size="2"></font></p>
                  <img src="images/amigos.jpg" alt="" class="img-responsive img-rounded" style="float: right; width: 350px; height: 300px;">
                 
             </div>
-        </a>    
-    </DIV>
-    
-     </section>
-     <a href="#" id="scroll-to-top" class="dmtop global-radius"><i class="fa fa-angle-up"></i></a>  
+        </a>  
+        </DIV> <!-- 👈 CIERRE REAL DE GALERIA DE FOTOS -->
+        <div style="clear: both;"></div>
+                <!-- TITULO SECCION VIDEOS -->
+<div style="width: 100%; text-align: center; margin: 40px 0 20px 0;">
+    <h2>🎥 Videos</h2>
+</div>
+       
+    <DIV style="display: flex; justify-content: center;" class="gallery-container">  
+
+    <a href="javascript:void(0)" class="gallery-item">
+        <div class="hover-container">
+            <video
+                class="img-responsive img-rounded"
+                width="300"
+                height="300"
+                muted
+                loop
+                autoplay
+                preload="metadata"
+                style="object-fit: cover;">
+                
+                <source src="images/vw.mp4" type="video/mp4">
+            </video>
+        </div>
+    </a>
+         
+    </DIV> <!-- cierre galería de VIDEOS -->
+       
+
+</section>
+
+<a href="#" id="scroll-to-top"><i class="fa fa-angle-up"></i></a>    
+<!-- <a href="#" id="scroll-to-top" class="dmtop global-radius"><i class="fa fa-angle-up"></i></a>  -->
+       
  
    
     <!-- ALL JS FILES -->
@@ -428,6 +349,41 @@ h2{
     <!-- Contact Javascript File -->
     <script src="mail/jqBootstrapValidation.min.js"></script>
     <script src="mail/contact.js"></script>
- 
+   
+    <script>
+    document.querySelectorAll('.gallery-item video').forEach(video => {
+        video.addEventListener('mouseenter', () => {
+            video.play();
+        });
+        video.addEventListener('mouseleave', () => {
+            video.pause();
+            video.currentTime = 0;
+        });
+    });
+   </script>
+<script>
+  const scrollBtn = document.getElementById("scroll-to-top");
+
+  // Mostrar/ocultar el botón según el scroll
+  window.addEventListener("scroll", () => {
+      if (window.scrollY > 200) {  // Aparece cuando bajás 200px
+          scrollBtn.style.display = "block";
+      } else {
+          scrollBtn.style.display = "none";
+      }
+  });
+
+  // Al hacer click, subir al inicio suavemente
+  scrollBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+      });
+  });
+</script>
+
+
+
     </body>
 </html>
