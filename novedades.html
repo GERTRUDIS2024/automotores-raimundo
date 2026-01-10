@@ -43,9 +43,12 @@
         html, body {
             height: 100%;
             margin: 0;
-            overflow-x: hidden; /* Para evitar desplazamiento horizontal */
-            overflow-y: scroll; /* Esto asegura que siempre haya un scroll vertical */
-            scroll-behavior: none; /* Desplazamiento suave */
+            padding: 0;
+            
+           /* overflow-x: hidden; /* Para evitar desplazamiento horizontal */
+           /* overflow-y: scroll; /* Esto asegura que siempre haya un scroll vertical */
+           /* scroll-behavior: none; /* Desplazamiento suave */
+            
 }
         body {
             
@@ -335,8 +338,8 @@
 
 </section>
 
-<a href="#" id="scroll-to-top"><i class="fa fa-angle-up"></i></a>    
-<!-- <a href="#" id="scroll-to-top" class="dmtop global-radius"><i class="fa fa-angle-up"></i></a>  -->
+<a href="#" id="scroll-to-top"><i class="fa fa-angle-up"></i></a>     
+ <!-- <a href="#" id="scroll-to-top" class="dmtop global-radius"><i class="fa fa-angle-up"></i></a> -->
        
  
    
@@ -362,28 +365,26 @@
     });
    </script>
 <script>
+    
   const scrollBtn = document.getElementById("scroll-to-top");
 
-  // Mostrar/ocultar el botón según el scroll
-  window.addEventListener("scroll", () => {
-      if (window.scrollY > 200) {  // Aparece cuando bajás 200px
-          scrollBtn.style.display = "block";
-      } else {
-          scrollBtn.style.display = "none";
-      }
-  });
+document.addEventListener("scroll", () => {
+    if (document.documentElement.scrollTop > 200) {
+        scrollBtn.style.display = "block";
+    } else {
+        scrollBtn.style.display = "none";
+    }
+});
 
-  // Al hacer click, subir al inicio suavemente
-  scrollBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      window.scrollTo({
-          top: 0,
-          behavior: "smooth"
-      });
-  });
+scrollBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    document.documentElement.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+});
+
 </script>
-
-
 
     </body>
 </html>
