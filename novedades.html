@@ -25,15 +25,14 @@
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
-    <link rel="stylesheet" href="css/bootstrap-theme.css">
-    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    
     <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/owl.carousel.css">
-    <link rel="stylesheet" href="css/font-awesome.css">
+    
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/prettyPhoto.css">
     <link rel="stylesheet" href="css/custom.css">
-    <link rel="stylesheet" href="css/bootstrap.css">
+   
  
     <!-- Modernizer for Portfolio -->
     <script src="js/modernizer.js"></script>
@@ -48,7 +47,7 @@
            /* overflow-x: hidden; /* Para evitar desplazamiento horizontal */
            /* overflow-y: scroll; /* Esto asegura que siempre haya un scroll vertical */
            /* scroll-behavior: none; /* Desplazamiento suave */
-            
+             scroll-padding-top: 180px;
 }
         body {
             
@@ -62,12 +61,14 @@
 
         button {
 
-            text-align: center;
-            color: blue;
-            border: 2px solid blue;
-            border-radius: 5px;
-            height: 43px;
-            width: 100px;
+           text-align:center;
+color:blue;
+border:2px solid blue;
+border-radius:5px;
+padding:10px 20px;
+height:auto;
+width:auto;
+font-weight:bold;
         }
 
         button:hover {
@@ -99,55 +100,96 @@
             border-radius: 5px;
         }
 
-         .gallery-container {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(300px, 1fr));
-            /* grid-template-columns: repeat(3, minmax(200px,1fr));
-            grid-template-rows: repeat(3, minmax(200px,1fr));*/
-            gap: 5px;
-            padding: 20px;
-            max-width: 100%; /* Permite que el contenedor use el ancho completo disponible */
-            margin: auto;
-            flex-wrap: wrap;
-            justify-content: space-between;
-           
+        .gallery-container{
+            display:grid;
+            grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+            gap:20px;
+            padding:40px;
+            max-width:1400px;
+            margin:auto;
         }
+         
         
-        section{
-            width:100%;
-            position:relative;
-            background:radial-gradient(#333,#000);
-            padding-bottom: 50px;
+        section{ margin-top: 180px; /* espacio para que el header no tape contenido */
+      
                }
        
  h2{
-    width:100%;
+   width:100%;
     font-family: 'Courgette', cursive;
-    font-size:3em;
+    font-size:2.2em;
     text-align:center;
     color:#fff;
-    margin: 60px 0 30px 0;
+    margin:20px 0 10px 0;
     position: relative;
-}  
-#scroll-to-top {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    z-index: 9999;
-    display: none;       /* Empieza oculto */
-    background: #ff0000;
-    color: #fff;
-    width: 45px;
-    height: 45px;
-    line-height: 45px;
-    text-align: center;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 24px;
+
+} 
+
+#scroll-to-top{
+position:fixed;
+bottom:25px;
+right:25px;
+z-index:9999;
+display:none;
+background:#ff0000;
+color:white;
+width:45px;
+height:45px;
+border-radius:50%;
+text-align:center;
+line-height:45px;
+font-size:22px;
+transition:all .3s;
 }
-#scroll-to-top:hover {
-    background: #ffcc00;
-    color: #000;
+
+#scroll-to-top:hover{
+background:#ffcc00;
+color:black;
+transform:scale(1.1);
+}
+
+.header_style_01{
+     position: fixed;
+    top: 0;
+   
+}
+
+.gallery-container video{
+   
+    position: relative;
+    z-index: 1;
+}
+
+.hover-container{
+    background:#000;
+padding:10px;
+border-radius:10px;
+transition:all 0.3s ease;
+ 
+}
+
+.hover-container:hover{
+transform:translateY(-5px);
+box-shadow:0 10px 20px rgba(0,0,0,0.5);
+}
+.gallery-item img{
+    width:100%;
+    height:260px;
+    object-fit:cover;
+    transition: transform 0.4s ease;
+}
+
+.gallery-item:hover img{
+    transform:scale(1.05);
+}
+
+#videos + .gallery-container{
+padding-top:0px;
+}
+
+#videos h2{
+margin-top:10px;
+margin-bottom:10px;
 }
 
 
@@ -318,27 +360,28 @@
         </DIV> <!-- 👈 CIERRE REAL DE GALERIA DE FOTOS -->
         <div style="clear: both;"></div>
         
-                <!-- TITULO SECCION VIDEOS >
-<div style="width: 100%; text-align: center; margin: 40px 0 20px 0;">
-    <h2>🎥 Videos</h2>
-</div>
-<-->                
+            
 <!-- TITULO SECCION VIDEOS -->
-<div id="videos" style="width: 100%; text-align: center; margin: 40px 0 20px 0;">
+<div id="videos" style="width: 100%; text-align: center; margin: 20px 0 10px 0;">
+
     <h2>🎥 Videos</h2>
 </div>                
-    <!-- NO HAY VIDEOS -->   
-    <DIV style="display: flex; justify-content: center;" class="gallery-container">  
+    <!-- NO HAY VIDEOS -->  
+    <DIV style="display: flex; justify-content: center; margin-top:-20px;" class="gallery-container">
+   
 
     <a href="javascript:void(0)" class="gallery-item">
         <div class="hover-container">
-            <video
-                class="img-responsive img-rounded"
-                width="300"
-                height="300"
-                loop
-                preload="metadata"
-                style="object-fit: cover;">
+         <video
+class="img-responsive img-rounded"
+style="width:280px;height:380px;object-fit:cover;"
+loop
+preload="metadata">
+
+<source src="images/financiacion.mp4" type="video/mp4">
+
+</video>
+            
                 
                 <source src="images/financiacion.mp4" type="video/mp4">
             </video>
@@ -351,8 +394,7 @@
 </section>
 
 <a href="#" id="scroll-to-top"><i class="fa fa-angle-up"></i></a>     
- <!-- <a href="#" id="scroll-to-top" class="dmtop global-radius"><i class="fa fa-angle-up"></i></a> -->
-       
+
  
    
     <!-- ALL JS FILES -->
