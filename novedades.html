@@ -192,7 +192,32 @@ margin-top:10px;
 margin-bottom:10px;
 }
 
+.neon {
+  color: #fff;
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+  animation: glow 1.5s ease-in-out infinite alternate;
+}
 
+@keyframes glow {
+  from {
+    text-shadow: 
+      0 0 5px #fff,
+      0 0 10px #fff,
+      0 0 15px #00ffff,
+      0 0 20px #00ffff,
+      0 0 25px #00ffff;
+  }
+  to {
+    text-shadow: 
+      0 0 10px #fff,
+      0 0 20px #00ffff,
+      0 0 30px #00ffff,
+      0 0 40px #00ffff,
+      0 0 50px #00ffff;
+  }
+}
  </style>   
  
 </head>
@@ -292,7 +317,16 @@ margin-bottom:10px;
           flex-wrap: wrap;
           gap: 20px;
           ">
-         
+       
+        <a href="javascript:void(0)" class="gallery-item">
+    <div class="hover-container">
+        <p class="neon">
+            HORARIOS PARA QUE NOS VISITES
+        </p>
+        <img src="images/HORARIONUEVO.jpg" alt="" class="img-responsive img-rounded" style="float: left; width: 300px; height: 400px;">
+    </div>
+    </a> 
+       
       <a href= "javascript:void(0)"  class="gallery-item" >
             <div class="hover-container">
                  <p><font color="#ffffff" size="5"><B>GRACIAS CHICOS!! DISFRUTENLO !!</B></font><br><font color="#ffffff" size="2"> </font></p>
@@ -318,7 +352,6 @@ margin-bottom:10px;
             <div class="hover-container">
                  <p><font color="#ffffff" size="5"><B>GRACIAS CLAUDIA !!</B></font><br><font color="#ffffff" size="2">QUE DISFRUTES TU PEUGEOT</font></p>
                  <img src="images/claudia.jpg" alt="" class="img-responsive img-rounded" style="float: left; width: 350px; height: 300px;">
-                
             </div>
         </a>
        <a href= "javascript:void(0)"  class="gallery-item" >
@@ -396,7 +429,6 @@ preload="metadata">
 <a href="#" id="scroll-to-top"><i class="fa fa-angle-up"></i></a>     
 
  
-   
     <!-- ALL JS FILES -->
     <script src="js/all.js"></script>
     <!-- ALL PLUGINS -->
