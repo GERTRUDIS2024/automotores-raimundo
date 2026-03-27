@@ -1162,7 +1162,6 @@ function closeLightbox() {
         </div>
   </div>
  
-
 <!-- GALERIA 04 LIBRE> 
  <div id="subgaleria4" class="lightbox">
     
@@ -3692,7 +3691,7 @@ function closeLightbox() {
   </div> 
  
    
- <!-- Contact Start >
+ <!-- Contact Start -->
     <div style="background-color:#111; padding: 50px 20px 30px 20px;">
         <div style="max-width: 800px; margin: 0 auto;">
             <p style="text-align:center;">
@@ -3700,12 +3699,29 @@ function closeLightbox() {
                 <span style="color:#cccccc; font-size:1em;">aunque te esperamos nos visites para brindarte todos los detalles !!</span>
             </p>
 
+            <div id="contactSuccess" style="
+                 display:none;
+                 opacity:0;
+                 transform: translateY(-10px);
+                 transition: all 0.4s ease;
+                 color:#00e676;
+                 text-align:center;
+                 font-size:1.1em;
+                 margin-bottom:15px;
+                 font-weight:bold;
+                 ">
+                  ✔ ¡Mensaje enviado correctamente! Nos pondremos en contacto pronto.
+            </div>
+            <!--
             <div id="contactSuccess" style="display:none; color:#00e676; text-align:center; font-size:1.1em; margin-bottom:15px; font-weight:bold;">
                 ✔ ¡Mensaje enviado correctamente! Nos pondremos en contacto pronto.
             </div>
-
-            <form id="contactForm" action="send_mail.php" method="POST" onsubmit="handleContactSubmit(event)"
-                  style="background-color:#1a1a1a; border: 1px solid #ff0000; border-radius:10px; padding:30px;">
+            -->
+            <form id="contactForm" action="https://formspree.io/f/xdapanzo" method="POST"
+                style="background-color:#1a1a1a; border: 1px solid #ff0000; border-radius:10px; padding:30px;">
+                <!-- 👇 ACÁ VA -->
+                <input type="hidden" name="_subject" value="Nueva consulta desde la web">
+                          
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-bottom:15px;">
                     <div>
                         <label style="color:#ff0000; font-size:0.85em; font-weight:bold; display:block; margin-bottom:5px;">NOMBRE *</label>
@@ -3738,35 +3754,18 @@ function closeLightbox() {
                               style="width:100%; padding:10px 12px; border:1px solid #333; border-radius:5px; background:#000; color:#fff; font-size:0.95em; resize:vertical; box-sizing:border-box;"></textarea>
                 </div>
                 <div style="text-align:center;">
-  <button type="submit"
-    style="
-      background:#ff0000;
-      color:#fff;
-      border:2px solid #ff0000;
-      border-radius:5px;
-      padding:12px 25px;
-      font-size:1em;
-      font-weight:bold;
-      cursor:pointer;
-      letter-spacing:1px;
-      display:inline-block;
-      transition: background 0.2s, color 0.2s;
-      max-width:100%;
-      box-sizing:border-box;
-      white-space: normal;
-      text-align: center;
-    "
-    onmouseover="this.style.background='#ff0'; this.style.color='#000';"
-    onmouseout="this.style.background='#ff0000'; this.style.color='#fff';">
-    ENVIAR CONSULTA
-  </button>
+ 
+       <button id="submitBtn" type="submit" style="all:unset; background:#ff0000; color:#fff; padding:12px 25px; display:inline-block; border-radius:5px; cursor:pointer; font-weight:bold;">
+               ENVIAR CONSULTA
+       </button>             
+     
 </div>    
             </form>
         </div>
     </div>
-    <!-- Contact End >
+    <!-- Contact End -->
 
-    <!-- Footer Start >
+    <!-- Footer Start -->
     <footer style="background-color:#0a0a0a; border-top: 2px solid #ff0000; padding: 30px 20px 15px 20px; text-align:center;">
         <div style="max-width: 900px; margin: 0 auto;">
             <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:30px; margin-bottom:20px; align-items:center;">
@@ -3800,6 +3799,81 @@ function closeLightbox() {
     <!-- Contact Javascript File -->
     <script src="mail/jqBootstrapValidation.min.js"></script>
     <script src="mail/contact.js"></script>
- 
+  
+    
+    <script>
+const form = document.getElementById("contactForm");
+const successMsg = document.getElementById("contactSuccess");
+const btn = document.getElementById("submitBtn");
+
+form.addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const data = new FormData(form);
+
+    // 👉 Estado ENVIANDO
+    btn.innerText = "ENVIANDO...";
+    btn.disabled = true;
+    btn.style.opacity = "0.7";
+
+    try {
+        const response = await fetch(form.action, {
+            method: form.method,
+            body: data,
+            headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+            // 👉 Mostrar mensaje con animación
+            successMsg.style.display = "block";
+            setTimeout(() => {
+                successMsg.style.opacity = "1";
+                successMsg.style.transform = "translateY(0)";
+            }, 10);
+
+            // 👉 Reset form
+            form.reset();
+
+            // 👉 Botón ENVIADO
+            btn.innerText = "ENVIADO ✔";
+            btn.style.background = "#00e676";
+            btn.style.borderColor = "#00e676";
+            btn.style.color = "#000";
+
+            // 👉 Volver a estado normal después de unos segundos
+            setTimeout(() => {
+                successMsg.style.opacity = "0";
+                successMsg.style.transform = "translateY(-10px)";
+
+                setTimeout(() => {
+                    successMsg.style.display = "none";
+                }, 400);
+
+                btn.innerText = "ENVIAR CONSULTA";
+                btn.disabled = false;
+                btn.style.opacity = "1";
+                btn.style.background = "#ff0000";
+                btn.style.borderColor = "#ff0000";
+                btn.style.color = "#fff";
+            }, 4000);
+
+        } else {
+            alert("Error al enviar. Intentá nuevamente.");
+            resetButton();
+        }
+
+    } catch (error) {
+        alert("Error de conexión.");
+        resetButton();
+    }
+});
+
+function resetButton() {
+    btn.innerText = "ENVIAR CONSULTA";
+    btn.disabled = false;
+    btn.style.opacity = "1";
+}
+</script>
+
 </body>
 </html>
