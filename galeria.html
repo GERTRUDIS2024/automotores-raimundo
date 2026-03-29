@@ -3676,10 +3676,10 @@ function closeLightbox() {
  
    
  <!-- Contact Start -->
-    <div style="background-color:#111; padding: 50px 20px 30px 20px;">
-        <div style="max-width: 800px; margin: 0 auto;">
+    <div style="background-color:#111; padding: 40px 15px 20px 15px;">
+        <div style="max-width: 1000px; margin: 0 auto;">
             <p style="text-align:center;">
-                <span style="color:#ffffff; font-size:1.6em; font-weight:bold;">Consultanos por esta vía si deseas,</span><br>
+                <span style="color:#ffffff; font-size:1.3em; font-weight:bold;">Consultanos por esta vía si deseas,</span><br>
                 <span style="color:#cccccc; font-size:1em;">aunque te esperamos nos visites para brindarte todos los detalles !!</span>
             </p>
 
@@ -3696,50 +3696,46 @@ function closeLightbox() {
                  ">
                   ✔ ¡Mensaje enviado correctamente! Nos pondremos en contacto pronto.
             </div>
-            <!--
-            <div id="contactSuccess" style="display:none; color:#00e676; text-align:center; font-size:1.1em; margin-bottom:15px; font-weight:bold;">
-                ✔ ¡Mensaje enviado correctamente! Nos pondremos en contacto pronto.
-            </div>
-            -->
+           
             <form id="contactForm" action="https://formspree.io/f/xdapanzo" method="POST"
-                style="background-color:#1a1a1a; border: 1px solid #ff0000; border-radius:10px; padding:30px;">
+                style="background-color:#1a1a1a; border: 1px solid #ff0000; border-radius:10px; padding:20px;">
                 <!-- 👇 ACÁ VA -->
                 <input type="hidden" name="_subject" value="Nueva consulta desde la web">
                           
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-bottom:15px;">
                     <div>
-                        <label style="color:#ff0000; font-size:0.85em; font-weight:bold; display:block; margin-bottom:5px;">NOMBRE *</label>
+                        <label style="color:#ff0000; font-size:0.9em; font-weight:bold; display:block; margin-bottom:5px;">NOMBRE *</label>
                         <input type="text" name="nombre" id="contactNombre" placeholder="Ingrese su nombre"
-                               style="width:100%; padding:10px 12px; border:1px solid #333; border-radius:5px; background:#000; color:#fff; font-size:0.95em; box-sizing:border-box;"
+                               style="width:100%; padding:8px 10px; border:1px solid #333; border-radius:5px; background:#000; color:#fff; font-size:0.95em; box-sizing:border-box;"
                                required />
                     </div>
                     <div>
-                        <label style="color:#ff0000; font-size:0.85em; font-weight:bold; display:block; margin-bottom:5px;">APELLIDO *</label>
+                        <label style="color:#ff0000; font-size:0.9em; font-weight:bold; display:block; margin-bottom:5px;">APELLIDO *</label>
                         <input type="text" name="apellido" id="contactApellido" placeholder="Ingrese su apellido"
-                               style="width:100%; padding:10px 12px; border:1px solid #333; border-radius:5px; background:#000; color:#fff; font-size:0.95em; box-sizing:border-box;"
+                               style="width:100%; padding:8px 10px; border:1px solid #333; border-radius:5px; background:#000; color:#fff; font-size:0.95em; box-sizing:border-box;"
                                required />
                     </div>
                     <div>
-                        <label style="color:#ff0000; font-size:0.85em; font-weight:bold; display:block; margin-bottom:5px;">TELÉFONO *</label>
+                        <label style="color:#ff0000; font-size:0.9em; font-weight:bold; display:block; margin-bottom:5px;">TELÉFONO *</label>
                         <input type="tel" name="telefono" id="contactTelefono" placeholder="Ej: 11 1234-5678"
-                               style="width:100%; padding:10px 12px; border:1px solid #333; border-radius:5px; background:#000; color:#fff; font-size:0.95em; box-sizing:border-box;"
+                               style="width:100%; padding:8px 10px; border:1px solid #333; border-radius:5px; background:#000; color:#fff; font-size:0.95em; box-sizing:border-box;"
                                required />
                     </div>
                     <div>
-                        <label style="color:#ff0000; font-size:0.85em; font-weight:bold; display:block; margin-bottom:5px;">EMAIL *</label>
+                        <label style="color:#ff0000; font-size:0.9em; font-weight:bold; display:block; margin-bottom:5px;">EMAIL *</label>
                         <input type="email" name="email" id="contactEmail" placeholder="ejemplo@correo.com"
-                               style="width:100%; padding:10px 12px; border:1px solid #333; border-radius:5px; background:#000; color:#fff; font-size:0.95em; box-sizing:border-box;"
+                               style="width:100%; padding:8px 10px; border:1px solid #333; border-radius:5px; background:#000; color:#fff; font-size:0.95em; box-sizing:border-box;"
                                required />
                     </div>
                 </div>
                 <div style="margin-bottom:20px;">
-                    <label style="color:#ff0000; font-size:0.85em; font-weight:bold; display:block; margin-bottom:5px;">DETALLE / CONSULTA</label>
+                    <label style="color:#ff0000; font-size:0.9em; font-weight:bold; display:block; margin-bottom:5px;">DETALLE / CONSULTA</label>
                     <textarea name="detalle" id="contactDetalle" rows="4" placeholder="Escriba aquí su consulta o comentario..."
-                              style="width:100%; padding:10px 12px; border:1px solid #333; border-radius:5px; background:#000; color:#fff; font-size:0.95em; resize:vertical; box-sizing:border-box;"></textarea>
+                              style="width:100%; padding:8px 10px; border:1px solid #333; border-radius:5px; background:#000; color:#fff; font-size:0.95em; resize:vertical; box-sizing:border-box;"></textarea>
                 </div>
                 <div style="text-align:center;">
  
-       <button id="submitBtn" type="submit" style="all:unset; background:#ff0000; color:#fff; padding:12px 25px; display:inline-block; border-radius:5px; cursor:pointer; font-weight:bold;">
+       <button id="submitBtn" type="submit" style="all:unset; background:#ff0000; color:#fff; padding:10px 20px; display:inline-block; border-radius:5px; cursor:pointer; font-weight:bold;font-size:0.9em;">
                ENVIAR CONSULTA
        </button>             
      
