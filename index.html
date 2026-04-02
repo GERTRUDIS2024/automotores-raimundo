@@ -21,80 +21,87 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/owl.carousel.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/prettyPhoto.css">
     <link rel="stylesheet" href="css/custom.css">
-   
+    <link rel="stylesheet" href="css/bootstrap.css">
  
     <style>
-  body {
-    overflow-x: hidden;
-}     
-.address-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-}
+       
+        
+        .contacto-container {
+            width: 100%; /* Hace que el contenedor se ajuste al tamaño de la ventana */
+          /*  display: flex; /* Si usas un layout de flexbox */
+            justify-content: center; /* Centra las imágenes */
+        }
+        
+        
+        .address-item{
+	float: left;
+	margin: 0 5px;
+	padding: 0px 15px; 
+	width: 23%;
+        background-color: #aaaaaa;
+        box-shadow: 0 5px 14px rgba(0, 0, 0, 2); 
+     
+        }
 
-.address-item {
-    flex: 1 1 250px;
-    max-width: 260px;
-    padding: 20px;
-    background-color: #aaaaaa;
-    box-shadow: 0 5px 14px rgba(0,0,0,0.3);
-    text-align: center;
-}
-
-/* Tablet */
-@media (max-width: 768px) {
-    .address-item {
-        flex: 1 1 45%;
-        max-width: 45%;
+       .address-icon{
+	 padding: 15px 0px;
+        }
+        
+        
+        
+    .address-container {
+       display: flex;
+       flex-wrap: wrap;
+       justify-content: center;
+       gap: 20px;
+       padding: 20px;
+       width: 100%;
+       max-width: 1200px;
+       margin: 0 auto;
     }
-}
 
-/* Celular */
-@media (max-width: 480px) {
-    .address-item {
-        flex: 1 1 100%;
-        max-width: 100%;
+    /* 👇 Esto lo hace responsivo en celular */
+    @media screen and (max-width: 768px) {
+        .address-item {
+           flex: 1 1 100%;
+           max-width: 100%;
+        }
     }
-}
- .navbar-brand img {
-    max-width: 100%;
-    height: auto;
-}
-
-@media (max-width: 768px) {
-    .navbar-brand img {
-        width: 200px;
-    }
-}
-@media screen and (orientation: landscape) and (max-width: 900px) {
+        
     
-    .slider-content-area h1 {
-        font-size: 22px;
+    .address-icon i{
+        font-size: 38px;
+	color: #ff0000;
     }
 
-    .slider-content-area h2 {
-        font-size: 16px;
+    .address-item h3{
+      	font-size: 28px;
+       	font-weight: 600;
+       color: #ff0000;
     }
 
-    .address-item {
-        flex: 1 1 45%;
-        max-width: 45%;
+    .dmtop.show {
+        bottom: 20px;
     }
-
-    .top-bar {
-        display: none; /* opcional para ganar espacio */
-    }
-}
-
-
-</style>
+    
+    </style>
     
     <script>
         
-       
+        if (/Mobi|Android/i.test(navigator.userAgent)) {
+           alert("Para poder observar la pagina, activa el modo 'Sitio para ordenadores' en tu navegador.");
+        } 
+        
         function Blink()  {
            var ElemsBlink = document.getElementsByTagName('blink');
            for(var i=0;i<ElemsBlink.length;i++)
