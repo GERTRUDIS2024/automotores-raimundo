@@ -409,7 +409,7 @@ margin-bottom:10px;
             preload="metadata">
             <source src="images/financiacion_h264.mp4" type="video/mp4">
         </video>
-        <-->
+       
         <video
             class="img-responsive img-rounded"
             style="width:280px;height:400px;object-fit:cover;"
@@ -423,6 +423,19 @@ margin-bottom:10px;
 </DIV>
  <!-- FIN GALERIA DE VIDEOS -->
  
+ <!-- ATENCION CON LOS MP4 QUE NO APARECEN EN ALGUNOS NAVEGADORES !!!
+ 
+      SI LOS MP4 SE VEN SOLO EN CHROME Y NO EN LOS DEMAS NAVEGADORES ES PORQUE ESTA EL VIDEO CON CODEC H265, CONVERTIRLO
+      A H264 + AAC DE LA SIGUIENTE MANERA EN ffmpeg\bin.-Copiar ahi el mp4 a convertir y ejecutando CMD en
+      Ejecutarlo como administrador ; escribir el siguiente comando:
+ 
+      ffmpeg -i financiacion.mp4 
+      -c:v libx264 
+      -preset medium 
+      -crf 23 
+      -c:a aac 
+      -b:a 128k 
+      financiacion_h264.mp4 -->
 
 </section>
 
