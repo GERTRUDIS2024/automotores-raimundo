@@ -94,6 +94,30 @@
         bottom: 20px;
     }
     
+    /* Logo Mundial 2026 */
+.logo-mundial {
+    position: fixed;      /* Siempre visible */
+    top: 15px;
+    right: 20px;
+    z-index: 9999;
+}
+
+.logo-mundial img{
+    width: 120px;
+    height: auto;
+}
+
+/* Celulares */
+@media (max-width:768px){
+    .logo-mundial{
+        top:10px;
+        right:10px;
+    }
+
+    .logo-mundial img{
+        width:70px;
+    }
+}
     </style>
     
     <script>
@@ -112,6 +136,13 @@
     
 <body onload="setInterval('Blink()',500)">
  
+    <div class="logo-mundial">
+    <a href="https://www.fifa.com/es/tournaments/mens/worldcup/canadamexicousa2026"
+       target="_blank">
+        <img src="images/mundial2026.png" alt="Mundial FIFA 2026">
+    </a>
+    </div>
+    
     <!-- LOADER -->
     <div id="preloader">
         <div class="loader">
@@ -157,6 +188,8 @@
 		    </div>
 	       </div>
     </div>
+    
+    
     
     <header class="header_style_01">
         <nav class="megamenu navbar navbar-default">
