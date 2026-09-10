@@ -287,6 +287,185 @@
         bottom: 20px;
     }
 
+    
+    /* ===== SOBRE NOSOTROS - DISEÑO MODERNO ===== */
+#nosotros {
+    position: relative;
+    padding: 90px 20px 80px;
+    background: 
+        radial-gradient(circle at 85% 20%, rgba(230, 0, 0, 0.08), transparent 30%),
+        linear-gradient(180deg, #0d0d0d 0%, #141414 100%);
+    color: #ffffff;
+}
+
+.nosotros-container {
+    max-width: 1250px;
+    margin: 0 auto;
+}
+
+.nosotros-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.nosotros-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    background: rgba(230, 0, 0, 0.15);
+    border: 1px solid rgba(230, 0, 0, 0.4);
+    color: #ff3333;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border-radius: 20px;
+    margin-bottom: 15px;
+}
+
+.nosotros-header h2 {
+    color: #fff;
+    font-size: 34px;
+    font-weight: 800;
+    margin: 0;
+}
+
+.nosotros-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.nosotros-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 40px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+}
+
+.nosotros-card h3 {
+    color: #fff;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.nosotros-card p {
+    color: #cccccc;
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 18px;
+}
+
+.nosotros-card p strong {
+    color: #ffffff;
+}
+
+.nosotros-image-wrapper {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.nosotros-image-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.nosotros-image-wrapper:hover img {
+    transform: scale(1.03);
+}
+
+/* Tarjetas de Destacados/KPIs */
+.nosotros-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.stat-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 25px 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+    background: rgba(230, 0, 0, 0.08);
+    border-color: rgba(230, 0, 0, 0.4);
+    transform: translateY(-5px);
+}
+
+.stat-item i {
+    font-size: 28px;
+    color: #e60000;
+    margin-bottom: 12px;
+}
+
+.stat-item h4 {
+    color: #fff;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.stat-item p {
+    color: #aaaaaa;
+    font-size: 13px;
+    margin: 0;
+}
+
+/* Responsivo */
+@media (max-width: 992px) {
+    .nosotros-grid {
+        grid-template-columns: 1fr;
+    }
+    .nosotros-stats {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .nosotros-stats {
+        grid-template-columns: 1fr;
+    }
+    .nosotros-header h2 {
+        font-size: 26px;
+    }
+    .nosotros-card {
+        padding: 25px;
+    }
+}
+
+/* ===== FONDO SLIDER - LUMINOSO / CASI TRANSPARENTE ===== */
+.slider-item-item.slider-bg-one,
+.slider-item.slider-bg-two,
+.slider-item.slider-bg-three {
+    background: 
+        linear-gradient(180deg, rgba(0, 0, 0, 0.10) 0%, rgba(0, 0, 0, 0.20) 100%),
+        url('images/about_01.jpg') no-repeat center center / cover !important;
+}
+
+/* Sombra oscura fuerte en los textos para que se sigan leyendo bien sobre el fondo claro */
+.slider-content-area .slide-text h1,
+.slider-content-area .slide-text h2 {
+    color: #ffffff !important;
+    text-shadow: 0px 3px 12px rgba(0, 0, 0, 0.95), 0px 1px 3px rgba(0, 0, 0, 0.9) !important;
+}
+
+.slider-content-area .slide-text span {
+    color: #ff3333 !important;
+    text-shadow: 0px 3px 12px rgba(0, 0, 0, 0.95) !important;
+}
     </style>
     
     <script>
@@ -435,30 +614,59 @@
 		</div>
 	</div>
 
-    <div id="nosotros" class="section wb">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="message-box">
-                        <h4>Sobre Nosotros</h4>
-                        <h2>Bienvenidos !!!</h2>
-                        <h2>Automotores Raimundo S.R.L.</h2>
-                        <p class="lead">La confiabilidad comercial de siempre y los años de experiencia avalan nuestra trayectoria, comercializando 0Km y los mejores usados del mercado,adaptando los planes de pago a las necesidades y posibilidades de cada persona.
-                        Agradecemos la confianza que nos brindan dia a dia nuestros amigos y fieles clientes.</p>    
-                        <p> Visitenos en nuestra concesionaria amiga.No solo le ofrecemos los mejores vehiculos completamente chequeados y verificados por profesionales competentes,sino que tambien tenemos gestores profesionales que haran el trabajo de transferencia y patentamiento.</p>
-               <a href="index.html" class="active btn-light btn-brd">Volver</a>
-                    </div><!-- end messagebox -->
-                </div><!-- end col -->
+    <!-- COMIENZO DE SOBRE NOSOTROS -->
+<div id="nosotros">
+    <div class="nosotros-container">
+        
+        <div class="nosotros-header">
+            <span class="nosotros-badge">Trayectoria & Confiabilidad</span>
+            <h2>Bienvenidos a Automotores Raimundo S.R.L.</h2>
+        </div>
 
-                <div class="col-md-6">
-                    <div class="post-media fadeIn">
-                        <img src="images/about_01.jpg" alt="" class="img-responsive img-rounded">
-                        
-                    </div><!-- end media -->
-                </div><!-- end col -->
-            </div><!-- end row -->
-                    <!-- FIN DE SOBRE NOSOTROS !!!!!!!!!!!!! --> 
-                       
+        <div class="nosotros-grid">
+            <div class="nosotros-card">
+                <h3>Tu auto ideal está más cerca de lo que pensás</h3>
+                <p>
+                    La <strong>confiabilidad comercial</strong> de siempre y nuestros años de experiencia avalan nuestra trayectoria en el sector. Nos especializamos en la comercialización de <strong>0Km y los mejores usados seleccionados</strong> del mercado.
+                </p>
+                <p>
+                    Adaptamos cada plan de pago a las necesidades y posibilidades reales de cada cliente. Agradecemos la confianza que nos brindan día a día nuestros amigos y clientes de siempre.
+                </p>
+                <p>
+                    Contamos con <strong>gestores profesionales propios</strong> que realizan todos los trámites de transferencia y patentamiento para tu total tranquilidad.
+                </p>
+            </div>
+
+            <div class="nosotros-image-wrapper">
+                <img src="images/about_01.jpg" alt="Automotores Raimundo Concesionaria" class="img-responsive">
+            </div>
+        </div>
+
+        <!-- TARJETAS DE DESTACADOS / CONFITABILIDAD -->
+        <div class="nosotros-stats">
+            <div class="stat-item">
+                <i class="fa fa-car"></i>
+                <h4>0Km y Usados</h4>
+                <p>Vehículos completamente chequeados y verificados.</p>
+            </div>
+            <div class="stat-item">
+                <i class="fa fa-file-text-o"></i>
+                <h4>Gestoría Propia</h4>
+                <p>Nos encargamos de todo el patentamiento y transferencia.</p>
+            </div>
+            <div class="stat-item">
+                <i class="fa fa-handshake-o"></i>
+                <h4>Planes a Medida</h4>
+                <p>Financiación adaptada a tus posibilidades.</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- FIN DE SOBRE NOSOTROS -->
+    
+    
+     
     <hr class="hr1">     
     <!-- Comienzo de contacto  -->
 
