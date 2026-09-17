@@ -466,6 +466,109 @@
     color: #ff3333 !important;
     text-shadow: 0px 3px 12px rgba(0, 0, 0, 0.95) !important;
 }
+
+        /* =========================================================
+           MENU OCULTO EN "SOBRE NOSOTROS" Y "CONTACTOS"
+           - Al entrar a #nosotros o #contacto, el menú desaparece.
+           - El contenido ocupa el espacio liberado.
+           - Al acercar el mouse al borde superior, el menú reaparece.
+           ========================================================= */
+
+        body.menu-oculto .header_style_01 {
+            position: fixed !important;
+            top: -120px !important;
+            left: 0 !important;
+            right: 0 !important;
+            width: 100% !important;
+            z-index: 9998 !important;
+            margin: 0 !important;
+            opacity: 0;
+            visibility: hidden;
+            transition: top .35s ease, opacity .25s ease, visibility .25s ease;
+        }
+
+        body.menu-visible .header_style_01 {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            width: 100% !important;
+            z-index: 9998 !important;
+            margin: 0 !important;
+            opacity: 1;
+            visibility: visible;
+            transition: top .35s ease, opacity .25s ease, visibility .25s ease;
+        }
+
+        /* Zona invisible de activación en la parte superior */
+        #menu-hover-zone {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 18px;
+            z-index: 10000;
+            display: none;
+        }
+
+        body.menu-oculto #menu-hover-zone {
+            display: block;
+        }
+
+        /* Evita que el contenido quede tapado cuando el menú está visible */
+        body.menu-visible .slider-content-area,
+        body.menu-visible #nosotros,
+        body.menu-visible #contacto {
+            scroll-margin-top: 0;
+        }
+
+        @media screen and (max-width: 600px) {
+            body.menu-oculto .header_style_01 {
+                top: -90px !important;
+            }
+
+            body.menu-visible .header_style_01 {
+                top: 0 !important;
+            }
+        }
+/* Indicador visual de mano flotante en la esquina superior derecha */
+#indicador-menu {
+    position: fixed;
+    top: 10px;
+    right: 20px;
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    background: rgba(230, 0, 0, 0.85);
+    color: #ffffff;
+    padding: 6px 12px;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    pointer-events: none; /* Permite que los eventos de mouse pasen hacia la zona sensible */
+    animation: flotarMano 1.5s infinite ease-in-out;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+#indicador-menu .icono-mano {
+    font-size: 22px;
+    line-height: 1;
+}
+
+/* Animación sutil de rebote vertical */
+@keyframes flotarMano {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+/* Se muestra únicamente cuando el menú está oculto */
+body.menu-oculto #indicador-menu {
+    display: flex;
+}
     </style>
     
     <script>
@@ -483,7 +586,15 @@
     </script>
     
 <body onload="setInterval('Blink()',500)">
+
+    <!-- Zona superior para volver a mostrar el menú -->
+    <div id="menu-hover-zone" aria-hidden="true"></div>
  
+
+<!-- Indicador visual (mano) cuando el menú está oculto -->
+<div id="indicador-menu" title="Pasa el mouse por aquí para desplegar el menú">
+    <span class="icono-mano">☝️</span>
+</div>
    
     <!-- LOADER -->
     <div id="preloader">
@@ -778,6 +889,129 @@
     <script src="js/custom.js"></script>
     <script src="js/portfolio.js"></script>
     <script src="js/hoverdir.js"></script>  
+
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const header = document.querySelector(".header_style_01");
+        const hoverZone = document.getElementById("menu-hover-zone");
+
+        if (!header || !hoverZone) return;
+
+        let hideTimer;
+
+        function mostrarMenu() {
+            clearTimeout(hideTimer);
+            document.body.classList.remove("menu-oculto");
+            document.body.classList.add("menu-visible");
+        }
+
+        function ocultarMenu() {
+            clearTimeout(hideTimer);
+            document.body.classList.remove("menu-visible");
+            document.body.classList.add("menu-oculto");
+        }
+
+        function ocultarMenuConRetardo() {
+            clearTimeout(hideTimer);
+            hideTimer = setTimeout(function () {
+                const sobreNosotros = window.location.hash === "#nosotros";
+                const sobreContacto = window.location.hash === "#contacto";
+
+                if (sobreNosotros || sobreContacto) {
+                    ocultarMenu();
+                }
+            }, 500);
+        }
+
+        /*
+         * Cuando se pulsa "Sobre Nosotros" o "Contactos":
+         * 1. Ocultamos el menú.
+         * 2. Dejamos que el contenido ocupe ese espacio.
+         * 3. Desplazamos suavemente hasta la sección.
+         */
+        document.querySelectorAll('a[href="#nosotros"], a[href="#contacto"]').forEach(function (enlace) {
+            enlace.addEventListener("click", function (e) {
+                const destino = this.getAttribute("href");
+                const seccion = document.querySelector(destino);
+
+                if (!seccion) return;
+
+                e.preventDefault();
+
+                ocultarMenu();
+
+                history.pushState(null, "", destino);
+
+                setTimeout(function () {
+                    seccion.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start"
+                    });
+                }, 80);
+            });
+        });
+
+        /* Si se entra directamente con #nosotros o #contacto */
+        function revisarHash() {
+            if (window.location.hash === "#nosotros" ||
+                window.location.hash === "#contacto") {
+                ocultarMenu();
+            } else {
+                mostrarMenu();
+            }
+        }
+
+        window.addEventListener("hashchange", revisarHash);
+
+        /* Al pasar por la zona superior, aparece el menú */
+        hoverZone.addEventListener("mouseenter", function () {
+            mostrarMenu();
+        });
+
+        /* Mientras el mouse esté sobre el menú, permanece visible */
+        header.addEventListener("mouseenter", function () {
+            mostrarMenu();
+        });
+
+        /* Cuando se abandona el menú, vuelve a ocultarse si estamos en una sección */
+        header.addEventListener("mouseleave", function () {
+            ocultarMenuConRetardo();
+        });
+
+        /*
+         * Si el mouse se acerca al borde superior mientras estamos
+         * en Nosotros o Contactos, el menú vuelve a aparecer.
+         */
+        document.addEventListener("mousemove", function (e) {
+            if (e.clientY <= 18 &&
+                (window.location.hash === "#nosotros" ||
+                 window.location.hash === "#contacto")) {
+                mostrarMenu();
+            }
+        });
+
+        /* Estado inicial */
+        revisarHash();
+    });
+    
+    
+    
+    /* Al pasar por la zona superior o el indicador, aparece el menú */
+hoverZone.addEventListener("mouseenter", function () {
+    mostrarMenu();
+});
+
+/* Ocultar / Mostrar sincronizado al pasar mouse por el borde superior */
+document.addEventListener("mousemove", function (e) {
+    if (e.clientY <= 25 &&
+        (window.location.hash === "#nosotros" ||
+         window.location.hash === "#contacto")) {
+        mostrarMenu();
+    }
+});
+    </script>
 
 </body>
 </html>
