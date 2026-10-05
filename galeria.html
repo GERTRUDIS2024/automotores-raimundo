@@ -345,6 +345,81 @@
   opacity: 1;
 }
 
+    
+
+/* ==========================================
+   SECRETARIA VIRTUAL - SUBGALERIAS
+   ========================================== */
+#secretariaAyuda {
+    position: fixed;
+    left: 0.5vw;
+    bottom: 1vh;
+    width: min(28vw, 390px);
+    z-index: 1100;
+    display: none;
+    pointer-events: none;
+    opacity: 0;
+}
+
+#secretariaAyuda.visible {
+    display: block;
+    animation: secretariaEntrada 0.55s ease-out forwards;
+}
+
+#secretariaAyuda img {
+    display: block;
+    width: 100%;
+    height: auto;
+    pointer-events: none;
+}
+
+/* Cuando la secretaria aparece, corremos suavemente la foto hacia la derecha. */
+.lightbox.lightbox-with-secretary .lightbox-item.visible {
+    transform: translateX(7vw);
+}
+
+@keyframes secretariaEntrada {
+    from {
+        opacity: 0;
+        transform: translateX(-35px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* En pantallas medianas reducimos la figura para conservar espacio para el vehículo. */
+@media (max-width: 1024px) {
+    #secretariaAyuda {
+        width: min(30vw, 300px);
+        bottom: 1vh;
+    }
+
+    .lightbox.lightbox-with-secretary .lightbox-item.visible {
+        transform: translateX(5vw);
+    }
+}
+
+/* En celulares queda más pequeña y la foto vuelve prácticamente al centro. */
+@media (max-width: 600px) {
+    #secretariaAyuda {
+        width: 145px;
+        left: -5px;
+        bottom: 2px;
+        opacity: 0.95;
+    }
+
+    .lightbox.lightbox-with-secretary .lightbox-item.visible {
+        transform: translateX(0);
+    }
+
+    .lightbox-item {
+        max-width: 82%;
+        max-height: 65%;
+    }
+}
+
     </style>
 
     <script>
@@ -524,19 +599,37 @@ function showSubGallery(subgalleryId, ImageId) {
 
 function openLightbox(subgalleryId, ImageId) {
     const lightbox = document.getElementById(subgalleryId);
+    const secretaria = document.getElementById('secretariaAyuda');
+
     if (lightbox) {
-       
         lightbox.classList.add('visible');
-        
-        // Asegurémonos de mostrar la primera imagen de la subgalería
-        showImage(subgalleryId, ImageId); // Muestra la primera imagen
+        lightbox.classList.add('lightbox-with-secretary');
+
+        // Muestra la secretaria junto a la fotografía.
+        if (secretaria) {
+            secretaria.classList.add('visible');
+            secretaria.setAttribute('aria-hidden', 'false');
+        }
+
+        // Muestra la fotografía seleccionada.
+        showImage(subgalleryId, ImageId);
     }
-} 
+}
+
 function closeLightbox() {
     let lightbox = document.querySelector(".lightbox.visible");
+    const secretaria = document.getElementById('secretariaAyuda');
+
     if (lightbox) {
         lightbox.style.display = "none";
         lightbox.classList.remove('visible');
+        lightbox.classList.remove('lightbox-with-secretary');
+    }
+
+    // Oculta la secretaria al cerrar la subgaleria.
+    if (secretaria) {
+        secretaria.classList.remove('visible');
+        secretaria.setAttribute('aria-hidden', 'true');
     }
 }    
 </script>
@@ -879,6 +972,13 @@ function closeLightbox() {
         <-->
     </div>
     
+
+
+    <!-- SECRETARIA VIRTUAL: aparece solamente mientras una subgaleria esta abierta -->
+    <div id="secretariaAyuda" aria-hidden="true">
+        <img src="images/secretaria_auto.png" alt="Asesora señalando los vehículos">
+    </div>
+
      <!-- COMIENZO DE LAS SUBGALERIAS !!!!! -->
      
     <!-- GALERIA 01 -->
